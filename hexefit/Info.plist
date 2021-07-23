@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>HexeFit needs access to Health Data</string>
+	<key>Health Share </key>
+	<string>HexeFit needs access</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>HexeFit wants to read your ectivities data</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

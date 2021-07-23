@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  hexefit
+//  Fitilitc
 //
-//  Created by Renata Rego on 15/07/2021.
+//  Created by Renata Rego on 14/07/2021.
 //
 
 import UIKit
@@ -10,6 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
