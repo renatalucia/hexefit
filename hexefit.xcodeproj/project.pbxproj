@@ -18,8 +18,6 @@
 		9426BEBF26A09BA70068B840 /* hexefit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEBD26A09BA70068B840 /* hexefit.xcdatamodeld */; };
 		9426BEC126A09BAB0068B840 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEC026A09BAB0068B840 /* Assets.xcassets */; };
 		9426BEC426A09BAB0068B840 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEC226A09BAB0068B840 /* LaunchScreen.storyboard */; };
-		9426BECF26A09BAC0068B840 /* hexefitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BECE26A09BAC0068B840 /* hexefitTests.swift */; };
-		9426BEDA26A09BAC0068B840 /* hexefitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BED926A09BAC0068B840 /* hexefitUITests.swift */; };
 		9426BEE826A09F3C0068B840 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */; };
 		9426BEE926A09F3C0068B840 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */; };
 		9426BEEA26A09F3C0068B840 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */; };
@@ -66,11 +64,7 @@
 		9426BEC326A09BAB0068B840 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9426BEC526A09BAB0068B840 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9426BECA26A09BAC0068B840 /* hexefitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hexefitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9426BECE26A09BAC0068B840 /* hexefitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hexefitTests.swift; sourceTree = "<group>"; };
-		9426BED026A09BAC0068B840 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9426BED526A09BAC0068B840 /* hexefitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hexefitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9426BED926A09BAC0068B840 /* hexefitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hexefitUITests.swift; sourceTree = "<group>"; };
-		9426BEDB26A09BAC0068B840 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9426BEEB26A0A29E0068B840 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		9426BEED26A0B8340068B840 /* hexefit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hexefit.entitlements; sourceTree = "<group>"; };
@@ -166,8 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				9426BEB326A09BA70068B840 /* hexefit */,
-				9426BECD26A09BAC0068B840 /* hexefitTests */,
-				9426BED826A09BAC0068B840 /* hexefitUITests */,
 				9426BEB226A09BA70068B840 /* Products */,
 				7C42C2FC9EA3E3D98932B4A5 /* Pods */,
 				BA0BF81A155DA5303242E16D /* Frameworks */,
@@ -199,24 +191,6 @@
 				9426BEBD26A09BA70068B840 /* hexefit.xcdatamodeld */,
 			);
 			path = hexefit;
-			sourceTree = "<group>";
-		};
-		9426BECD26A09BAC0068B840 /* hexefitTests */ = {
-			isa = PBXGroup;
-			children = (
-				9426BECE26A09BAC0068B840 /* hexefitTests.swift */,
-				9426BED026A09BAC0068B840 /* Info.plist */,
-			);
-			path = hexefitTests;
-			sourceTree = "<group>";
-		};
-		9426BED826A09BAC0068B840 /* hexefitUITests */ = {
-			isa = PBXGroup;
-			children = (
-				9426BED926A09BAC0068B840 /* hexefitUITests.swift */,
-				9426BEDB26A09BAC0068B840 /* Info.plist */,
-			);
-			path = hexefitUITests;
 			sourceTree = "<group>";
 		};
 		BA0BF81A155DA5303242E16D /* Frameworks */ = {
@@ -490,7 +464,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9426BECF26A09BAC0068B840 /* hexefitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,7 +471,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9426BEDA26A09BAC0068B840 /* hexefitUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,7 +639,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bommhaus.hexefit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bommhaus.hexeTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -688,7 +660,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bommhaus.hexefit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bommhaus.hexeTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
