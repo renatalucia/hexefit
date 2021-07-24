@@ -39,26 +39,45 @@ class ViewController: UIViewController {
     
     @IBAction func SigninPressed(_ sender: UIButton) {
         
+//        HealthKitAssistant.authorizeHealthKit { (authorized, error) in
+            
+//            guard authorized else {
+//
+//                let baseMessage = "HealthKit Authorization Failed"
+//
+//                if let error = error {
+//                    print("\(baseMessage). Reason: \(error.localizedDescription)")
+//                } else {
+//                    print(baseMessage)
+//                }
+//
+//                return
+//            }
+//
+//            print("HealthKit Successfully Authorized.")
+//        }
         
         
-        if let email = emailTextField.text,
-           let password = passwordTextField.text{
-            Auth.auth().signIn(withEmail: email, password: password) {
-                 authResult, error in
-      
-                    if error != nil{
-                        print("Error sigining in: \(error!)")
-                        return
-                    }
-                    
-          
-                print("Signed in successfully")
-                self.userId = (Auth.auth().currentUser?.uid)!
-                print("Current user ID is" + self.userId!)
-                //self.performSegue(withIdentifier: "toHistory", sender: self)
-                
-            }
-        }
+        
+//
+//        if let email = emailTextField.text,
+//           let password = passwordTextField.text{
+//            Auth.auth().signIn(withEmail: email, password: password) {
+//                 authResult, error in
+//
+//                    if error != nil{
+//                        print("Error sigining in: \(error!)")
+//                        return
+//                    }
+//
+//
+//                print("Signed in successfully")
+//                self.userId = (Auth.auth().currentUser?.uid)!
+//                print("Current user ID is" + self.userId!)
+//                //self.performSegue(withIdentifier: "toHistory", sender: self)
+//
+//            }
+//        }
         
 //        if self.userId != nil{
 //

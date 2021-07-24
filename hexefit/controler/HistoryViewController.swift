@@ -27,13 +27,14 @@ class HistoryViewController: UIViewController {
     // MARK: - LifeCycle Methods
     
     override  func viewDidAppear(_ animated: Bool) {
-        print("here")
+        print("viewDidAppear")
         tableView.dataSource = self
         hexWorkouts = hexWorkouts?.sorted(by: { ($0.hkWorkout.endDate) > ($1.hkWorkout.endDate) })
         //        print(hexWorkouts)
     }
     
     override  func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
         //healthStoreAvailable = createHealthStore()
         
         hkAssistant.loadWorkouts { (workouts, error) in
@@ -49,11 +50,17 @@ class HistoryViewController: UIViewController {
                         }
                     }
                 }
+                DispatchQueue.main.async {
+                      self.tableView.reloadData()
+                    }
             }
+            
             else{
                 print("load workouts produced an error")
             }
-            
+            DispatchQueue.main.async {
+                  self.tableView.reloadData()
+                }
         }
         
         
@@ -63,7 +70,8 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
         
         
-        hkAssistant.authorizeHealthKit { (authorized, error) in
+        
+        HealthKitAssistant.authorizeHealthKit { (authorized, error) in
             
             guard authorized else {
                 
@@ -74,6 +82,9 @@ class HistoryViewController: UIViewController {
                 } else {
                     print(baseMessage)
                 }
+                DispatchQueue.main.async {
+                      self.tableView.reloadData()
+                    }
                 
                 return
             }
@@ -86,7 +97,7 @@ class HistoryViewController: UIViewController {
         tableView.rowHeight = 120;
         tableView.separatorStyle = .none
         
-        
+//        tableView.dataSource = self
         
     }
     

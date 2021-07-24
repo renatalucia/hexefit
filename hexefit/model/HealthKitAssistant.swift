@@ -17,7 +17,7 @@ struct HealthKitAssistant{
     }
     
     
-    func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Swift.Void) {
+    static func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Swift.Void) {
         //1. Check to see if HealthKit Is Available on this device
         guard HKHealthStore.isHealthDataAvailable() else {
             fatalError("Fatal Error")
@@ -70,9 +70,9 @@ struct HealthKitAssistant{
                         @escaping ([HKWorkout]?, Error?) -> Void) {
         
         
-        authorizeHealthKit { (authorization, error) in
+        HealthKitAssistant.authorizeHealthKit { (authorization, error) in
             guard error == nil else {
-                fatalError("HeathKit not Authorized")
+                fatalError("HeathKit not Authorized. Reason: \(error)")
                 // Not authorized, do something about it (for example UI message)
             }
             
@@ -110,7 +110,7 @@ struct HealthKitAssistant{
     func loadHeartRates(for workout: HKWorkout, completion:
                             @escaping ([Double]?, Error?) -> Void) {
         
-        authorizeHealthKit { (authorization, error) in
+        HealthKitAssistant.authorizeHealthKit { (authorization, error) in
             guard error == nil else {
                 fatalError("HeathKit not Authorized")
                 // Not authorized, do something about it (for example UI message)

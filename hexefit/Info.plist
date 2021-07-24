@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>HexeFit needs access to Health Data</string>
-	<key>Health Share </key>
-	<string>HexeFit needs access</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>HexeFit wants to read your ectivities data</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -26,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Hexefit needa to update data from your health kit in order to work properly</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Hexefit needs to access data from your health kit in order to work properly</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
