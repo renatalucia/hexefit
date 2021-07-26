@@ -184,6 +184,7 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
         self.hexWorkouts = []
         
         tableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "historyReusableCell")
@@ -197,6 +198,16 @@ class HistoryViewController: UIViewController {
         
     }
     
+       
+}
+
+extension HistoryViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        performSegue(withIdentifier: "ToActivitySummary", sender: self)
+
+    }
+
 }
 
 extension HistoryViewController: UITableViewDataSource{
@@ -247,6 +258,10 @@ extension HistoryViewController: UITableViewDataSource{
         
         return cell
     }
+    
+
+    
+
     
 }
 
