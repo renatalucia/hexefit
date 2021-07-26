@@ -28,6 +28,7 @@
 		944AF3FF26A5CEFC003DBA7F /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944AF3FD26A5CEFC003DBA7F /* HistoryCell.swift */; };
 		944AF40026A5CEFC003DBA7F /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 944AF3FE26A5CEFC003DBA7F /* HistoryCell.xib */; };
 		944CADBD26A6BE6900BDB358 /* HexWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944CADBC26A6BE6900BDB358 /* HexWorkout.swift */; };
+		94C2AB2B26ADA820005D2E4C /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB2A26ADA820005D2E4C /* UserProfile.swift */; };
 		96C4DAD608E1541A127FB6E0 /* Pods_hexefit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB942A6BDF385114DBE1D597 /* Pods_hexefit.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		944AF3FD26A5CEFC003DBA7F /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		944AF3FE26A5CEFC003DBA7F /* HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		944CADBC26A6BE6900BDB358 /* HexWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexWorkout.swift; sourceTree = "<group>"; };
+		94C2AB2A26ADA820005D2E4C /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		9AE7CA524C2469EEC957A2A9 /* Pods-hexefitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefitTests.release.xcconfig"; path = "Target Support Files/Pods-hexefitTests/Pods-hexefitTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB942A6BDF385114DBE1D597 /* Pods_hexefit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hexefit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51465A0006C611A13ABD582 /* Pods-hexefit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefit.release.xcconfig"; path = "Target Support Files/Pods-hexefit/Pods-hexefit.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			children = (
 				9426BEF426A3400B0068B840 /* HealthKitAssistant.swift */,
 				944CADBC26A6BE6900BDB358 /* HexWorkout.swift */,
+				94C2AB2A26ADA820005D2E4C /* UserProfile.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				9402A73526A4758800981F11 /* ActivityCell.swift in Sources */,
 				944AF3FF26A5CEFC003DBA7F /* HistoryCell.swift in Sources */,
 				9426BEF526A3400B0068B840 /* HealthKitAssistant.swift in Sources */,
+				94C2AB2B26ADA820005D2E4C /* UserProfile.swift in Sources */,
 				9426BEBF26A09BA70068B840 /* hexefit.xcdatamodeld in Sources */,
 				9426BEF326A33C060068B840 /* HistoryViewController.swift in Sources */,
 				9426BEB526A09BA70068B840 /* AppDelegate.swift in Sources */,

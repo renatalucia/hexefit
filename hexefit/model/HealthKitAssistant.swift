@@ -25,13 +25,17 @@ struct HealthKitAssistant{
         }
         
         //2. Prepare the data types that will interact with HealthKit
+        
         guard   let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
                 let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType),
                 let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
                 let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
                 let height = HKObjectType.quantityType(forIdentifier: .height),
                 let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass),
-                let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else {
+                let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
+                let restingHeartRate = HKObjectType.quantityType(forIdentifier: .restingHeartRate),
+                let basalEnergyBurned = HKObjectType.quantityType(forIdentifier: .basalEnergyBurned)
+        else {
             fatalError("Error Fatal")
         }
         
@@ -46,6 +50,8 @@ struct HealthKitAssistant{
                                                        bodyMassIndex,
                                                        height,
                                                        bodyMass,
+                                                       restingHeartRate,
+                                                       basalEnergyBurned,
                                                        HKObjectType.workoutType(),
                                                        HKObjectType.quantityType(forIdentifier: .heartRate)!]
         
@@ -66,7 +72,93 @@ struct HealthKitAssistant{
         }
     }
     
-    func loadWorkouts(completion:
+    
+    
+    
+    func loadUserBirthday  (completion:
+                                @escaping (DateComponents?) -> Void)   {
+        
+        let healthKitStore = HKHealthStore()
+        do{
+            let birthdayComponents = try healthKitStore.dateOfBirthComponents()
+            completion(birthdayComponents)
+        } catch {
+            print("could not load date of birthday")
+            completion(nil)
+        }
+        
+        
+        
+    }
+    
+    func loadUserBasalEnergyBurned(completion: @escaping (HKQuantitySample) -> Void) {
+        
+        guard let basalEnergyBurnedSampleType = HKSampleType.quantityType(forIdentifier: .basalEnergyBurned) else {
+            print("Basal Energy Burned Sample Type is no longer available in HealthKit")
+            return
+        }
+        
+        //1. Use HKQuery to load the most recent samples.
+        let mostRecentPredicate = HKQuery.predicateForSamples(
+            withStart: Date.distantPast,
+            end: Date().dayBefore)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        
+        //let limit = 1
+        let sampleQuery = HKSampleQuery(sampleType: basalEnergyBurnedSampleType,
+                                        predicate: mostRecentPredicate,
+                                        limit: HKObjectQueryNoLimit,
+                                        sortDescriptors:
+                                            [sortDescriptor]) { (query, samples, error) in
+            print(error)
+            print(samples!.count)
+            print(samples)
+            DispatchQueue.main.async {
+                guard let samples = samples,
+                      let mostRecentSample = samples.first as? HKQuantitySample else {
+                    print("loadUserBasalEnergyBurned sample is missing")
+                    return
+                }
+                completion(mostRecentSample)
+            }
+        }
+        HKHealthStore().execute(sampleQuery)
+    }
+    
+    
+    func loadUserRestingHeartRate(completion: @escaping (HKQuantitySample) -> Void) {
+        
+        guard let restingHeartRateSampleType = HKSampleType.quantityType(forIdentifier: .restingHeartRate) else {
+            print("Resting Heart Rate Sample Type is no longer available in HealthKit")
+            return
+        }
+        
+        //1. Use HKQuery to load the most recent samples.
+        let mostRecentPredicate = HKQuery.predicateForSamples(withStart: Date.distantPast,
+                                                              end: Date(),
+                                                              options: .strictEndDate)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        
+        //let limit = 1
+        let sampleQuery = HKSampleQuery(sampleType: restingHeartRateSampleType,
+                                        predicate: mostRecentPredicate,
+                                        limit: HKObjectQueryNoLimit,
+                                        sortDescriptors:
+                                            [sortDescriptor]) { (query, samples, error) in
+            DispatchQueue.main.async {
+                guard let samples = samples,
+                      let mostRecentSample = samples.first as? HKQuantitySample else {
+                    print("loadUserRestingHeartRate sample is missing")
+                    return
+                }
+                completion(mostRecentSample)
+            }
+        }
+        HKHealthStore().execute(sampleQuery)
+    }
+    
+    
+    func loadWorkouts(limit: Int, completion:
                         @escaping ([HKWorkout]?, Error?) -> Void) {
         
         
@@ -87,7 +179,7 @@ struct HealthKitAssistant{
             let query = HKSampleQuery(
                 sampleType: .workoutType(),
                 predicate: workoutPredicate,
-                limit: 0,
+                limit: limit,
                 sortDescriptors: [sortDescriptor]) { (query, samples, error) in
                 // DispatchQueue.main.async {
                 guard
@@ -257,5 +349,15 @@ extension HKWorkoutActivityType {
         // Catch-all
         default:                            return "Other"
         }
+    }
+}
+
+extension Date {
+    var dayAfter: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: self)!
+    }
+
+    var dayBefore: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: self)!
     }
 }
