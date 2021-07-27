@@ -9,11 +9,8 @@
 /* Begin PBXBuildFile section */
 		313049C0B4E2756B29C3C9FD /* Pods_hexefit_hexefitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5655C90C4A258F93845078B8 /* Pods_hexefit_hexefitUITests.framework */; };
 		8311F2EE968A8A0516681B2E /* Pods_hexefitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D1EA8B46612D9A09267843 /* Pods_hexefitTests.framework */; };
-		9402A73526A4758800981F11 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9402A73326A4758800981F11 /* ActivityCell.swift */; };
-		9402A73626A4758800981F11 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9402A73426A4758800981F11 /* ActivityCell.xib */; };
 		9426BEB526A09BA70068B840 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEB426A09BA70068B840 /* AppDelegate.swift */; };
 		9426BEB726A09BA70068B840 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEB626A09BA70068B840 /* SceneDelegate.swift */; };
-		9426BEB926A09BA70068B840 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEB826A09BA70068B840 /* ViewController.swift */; };
 		9426BEBC26A09BA70068B840 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEBA26A09BA70068B840 /* Main.storyboard */; };
 		9426BEBF26A09BA70068B840 /* hexefit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEBD26A09BA70068B840 /* hexefit.xcdatamodeld */; };
 		9426BEC126A09BAB0068B840 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEC026A09BAB0068B840 /* Assets.xcassets */; };
@@ -21,7 +18,6 @@
 		9426BEE826A09F3C0068B840 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */; };
 		9426BEE926A09F3C0068B840 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */; };
 		9426BEEA26A09F3C0068B840 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */; };
-		9426BEEC26A0A29E0068B840 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEEB26A0A29E0068B840 /* RegisterViewController.swift */; };
 		9426BEEF26A0B8340068B840 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9426BEEE26A0B8340068B840 /* HealthKit.framework */; };
 		9426BEF326A33C060068B840 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEF226A33C060068B840 /* HistoryViewController.swift */; };
 		9426BEF526A3400B0068B840 /* HealthKitAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEF426A3400B0068B840 /* HealthKitAssistant.swift */; };
@@ -29,6 +25,10 @@
 		944AF40026A5CEFC003DBA7F /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 944AF3FE26A5CEFC003DBA7F /* HistoryCell.xib */; };
 		944CADBD26A6BE6900BDB358 /* HexWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944CADBC26A6BE6900BDB358 /* HexWorkout.swift */; };
 		94C2AB2B26ADA820005D2E4C /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB2A26ADA820005D2E4C /* UserProfile.swift */; };
+		94C2AB3126B0587F005D2E4C /* PlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3026B0587F005D2E4C /* PlansViewController.swift */; };
+		94C2AB3326B05A4C005D2E4C /* WorkoutPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3226B05A4C005D2E4C /* WorkoutPlan.swift */; };
+		94C2AB3726B062FD005D2E4C /* PlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3526B062FD005D2E4C /* PlanCell.swift */; };
+		94C2AB3826B062FD005D2E4C /* PlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C2AB3626B062FD005D2E4C /* PlanCell.xib */; };
 		96C4DAD608E1541A127FB6E0 /* Pods_hexefit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB942A6BDF385114DBE1D597 /* Pods_hexefit.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,12 +53,9 @@
 		1700ACA8E6457D28518E8E6F /* Pods-hexefit-hexefitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefit-hexefitUITests.release.xcconfig"; path = "Target Support Files/Pods-hexefit-hexefitUITests/Pods-hexefit-hexefitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		38D1EA8B46612D9A09267843 /* Pods_hexefitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hexefitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5655C90C4A258F93845078B8 /* Pods_hexefit_hexefitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hexefit_hexefitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9402A73326A4758800981F11 /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
-		9402A73426A4758800981F11 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
 		9426BEB126A09BA70068B840 /* hexefit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hexefit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9426BEB426A09BA70068B840 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9426BEB626A09BA70068B840 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9426BEB826A09BA70068B840 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9426BEBB26A09BA70068B840 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9426BEBE26A09BA70068B840 /* hexefit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = hexefit.xcdatamodel; sourceTree = "<group>"; };
 		9426BEC026A09BAB0068B840 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,7 +64,6 @@
 		9426BECA26A09BAC0068B840 /* hexefitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hexefitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9426BED526A09BAC0068B840 /* hexefitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hexefitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9426BEEB26A0A29E0068B840 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		9426BEED26A0B8340068B840 /* hexefit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hexefit.entitlements; sourceTree = "<group>"; };
 		9426BEEE26A0B8340068B840 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		9426BEF226A33C060068B840 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +72,10 @@
 		944AF3FE26A5CEFC003DBA7F /* HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		944CADBC26A6BE6900BDB358 /* HexWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexWorkout.swift; sourceTree = "<group>"; };
 		94C2AB2A26ADA820005D2E4C /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		94C2AB3026B0587F005D2E4C /* PlansViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlansViewController.swift; sourceTree = "<group>"; };
+		94C2AB3226B05A4C005D2E4C /* WorkoutPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPlan.swift; sourceTree = "<group>"; };
+		94C2AB3526B062FD005D2E4C /* PlanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCell.swift; sourceTree = "<group>"; };
+		94C2AB3626B062FD005D2E4C /* PlanCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanCell.xib; sourceTree = "<group>"; };
 		9AE7CA524C2469EEC957A2A9 /* Pods-hexefitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefitTests.release.xcconfig"; path = "Target Support Files/Pods-hexefitTests/Pods-hexefitTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB942A6BDF385114DBE1D597 /* Pods_hexefit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hexefit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51465A0006C611A13ABD582 /* Pods-hexefit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefit.release.xcconfig"; path = "Target Support Files/Pods-hexefit/Pods-hexefit.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +132,7 @@
 				9426BEF426A3400B0068B840 /* HealthKitAssistant.swift */,
 				944CADBC26A6BE6900BDB358 /* HexWorkout.swift */,
 				94C2AB2A26ADA820005D2E4C /* UserProfile.swift */,
+				94C2AB3226B05A4C005D2E4C /* WorkoutPlan.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -141,8 +142,8 @@
 			children = (
 				944AF3FE26A5CEFC003DBA7F /* HistoryCell.xib */,
 				9426BEBA26A09BA70068B840 /* Main.storyboard */,
+				94C2AB3626B062FD005D2E4C /* PlanCell.xib */,
 				9426BEC226A09BAB0068B840 /* LaunchScreen.storyboard */,
-				9402A73426A4758800981F11 /* ActivityCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -150,11 +151,10 @@
 		941D0E6026AAE743003AEC23 /* controler */ = {
 			isa = PBXGroup;
 			children = (
-				9402A73326A4758800981F11 /* ActivityCell.swift */,
 				944AF3FD26A5CEFC003DBA7F /* HistoryCell.swift */,
 				9426BEF226A33C060068B840 /* HistoryViewController.swift */,
-				9426BEB826A09BA70068B840 /* ViewController.swift */,
-				9426BEEB26A0A29E0068B840 /* RegisterViewController.swift */,
+				94C2AB3026B0587F005D2E4C /* PlansViewController.swift */,
+				94C2AB3526B062FD005D2E4C /* PlanCell.swift */,
 			);
 			path = controler;
 			sourceTree = "<group>";
@@ -188,12 +188,20 @@
 				9426BEED26A0B8340068B840 /* hexefit.entitlements */,
 				9426BEE726A09F3C0068B840 /* GoogleService-Info.plist */,
 				9426BEB426A09BA70068B840 /* AppDelegate.swift */,
+				94C2AB3426B05E9C005D2E4C /* New Group */,
 				9426BEB626A09BA70068B840 /* SceneDelegate.swift */,
 				9426BEC026A09BAB0068B840 /* Assets.xcassets */,
 				9426BEC526A09BAB0068B840 /* Info.plist */,
 				9426BEBD26A09BA70068B840 /* hexefit.xcdatamodeld */,
 			);
 			path = hexefit;
+			sourceTree = "<group>";
+		};
+		94C2AB3426B05E9C005D2E4C /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		BA0BF81A155DA5303242E16D /* Frameworks */ = {
@@ -316,8 +324,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9426BEC426A09BAB0068B840 /* LaunchScreen.storyboard in Resources */,
-				9402A73626A4758800981F11 /* ActivityCell.xib in Resources */,
 				9426BEE826A09F3C0068B840 /* GoogleService-Info.plist in Resources */,
+				94C2AB3826B062FD005D2E4C /* PlanCell.xib in Resources */,
 				9426BEC126A09BAB0068B840 /* Assets.xcassets in Resources */,
 				944AF40026A5CEFC003DBA7F /* HistoryCell.xib in Resources */,
 				9426BEBC26A09BA70068B840 /* Main.storyboard in Resources */,
@@ -450,12 +458,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9426BEB926A09BA70068B840 /* ViewController.swift in Sources */,
-				9426BEEC26A0A29E0068B840 /* RegisterViewController.swift in Sources */,
-				9402A73526A4758800981F11 /* ActivityCell.swift in Sources */,
 				944AF3FF26A5CEFC003DBA7F /* HistoryCell.swift in Sources */,
 				9426BEF526A3400B0068B840 /* HealthKitAssistant.swift in Sources */,
 				94C2AB2B26ADA820005D2E4C /* UserProfile.swift in Sources */,
+				94C2AB3126B0587F005D2E4C /* PlansViewController.swift in Sources */,
+				94C2AB3326B05A4C005D2E4C /* WorkoutPlan.swift in Sources */,
+				94C2AB3726B062FD005D2E4C /* PlanCell.swift in Sources */,
 				9426BEBF26A09BA70068B840 /* hexefit.xcdatamodeld in Sources */,
 				9426BEF326A33C060068B840 /* HistoryViewController.swift in Sources */,
 				9426BEB526A09BA70068B840 /* AppDelegate.swift in Sources */,
