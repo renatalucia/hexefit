@@ -23,9 +23,9 @@
                                     <constraint firstAttribute="height" constant="500" id="CNm-ZE-3GJ"/>
                                 </constraints>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7b-rK-itu">
-                                <rect key="frame" x="139" y="812" width="95" height="30"/>
-                                <state key="normal" title="WorkoutPlans"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7b-rK-itu">
+                                <rect key="frame" x="92" y="763" width="191" height="79"/>
+                                <state key="normal" title="WorkoutPlans" image="fitwitch"/>
                                 <connections>
                                     <segue destination="SDV-3R-UDI" kind="show" id="Wnm-lX-sBL"/>
                                 </connections>
@@ -59,7 +59,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
-                                <rect key="frame" x="30" y="138" width="354" height="206"/>
+                                <rect key="frame" x="30" y="138" width="304.5" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="206"/>
@@ -204,7 +204,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                        <rect key="frame" x="160" y="0.0" width="194" height="206"/>
+                                        <rect key="frame" x="160" y="0.0" width="144.5" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -384,11 +384,43 @@
                     <navigationItem key="navigationItem" id="bHi-zz-r8W"/>
                     <connections>
                         <outlet property="tableView" destination="sge-w5-Hp5" id="2F9-Lf-19O"/>
+                        <segue destination="Oph-Y1-OIJ" kind="show" identifier="toWorkouPlan" id="UnD-pq-Wgs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0xd-oI-Cvt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3476.811594202899" y="1541.5178571428571"/>
+        </scene>
+        <!--Workout Plan View Controller-->
+        <scene sceneID="JbL-eU-wzI">
+            <objects>
+                <viewController id="Oph-Y1-OIJ" customClass="WorkoutPlanViewController" customModule="hexefit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="44B-fd-W26">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lGq-fH-pAa">
+                                <rect key="frame" x="0.0" y="24" width="414" height="848"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HWq-4r-fHT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="leading" secondItem="HWq-4r-fHT" secondAttribute="leading" id="Ig0-df-78w"/>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="bottom" secondItem="HWq-4r-fHT" secondAttribute="bottom" constant="10" id="Jtk-eO-Fwx"/>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="centerY" secondItem="44B-fd-W26" secondAttribute="centerY" id="jXz-KO-r0y"/>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="centerX" secondItem="44B-fd-W26" secondAttribute="centerX" id="sSd-69-EL8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="2Qz-c3-yus"/>
+                    <connections>
+                        <outlet property="tableView" destination="lGq-fH-pAa" id="nl9-Wz-b9k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tyR-mZ-cHf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4373.913043478261" y="1546.875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RaR-ge-tMe">
@@ -410,6 +442,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fitwitch" width="78.5" height="78.5"/>
         <image name="location.circle" catalog="system" width="128" height="121"/>
         <image name="speedometer" catalog="system" width="128" height="121"/>
         <image name="stopwatch" catalog="system" width="121" height="128"/>

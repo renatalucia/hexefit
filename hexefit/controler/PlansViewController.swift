@@ -11,6 +11,8 @@ class PlansViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var selectedWorkoutPlan: WorkoutPlan?
+    
     var wokoutPlans = [
         WorkoutPlan(name: "Lower Body Workout", description: "Created at 29.07.2021", sets: nil),
         WorkoutPlan(name: "Upper Body Workout", description: "Created at 27.07.2021", sets: nil)
@@ -28,20 +30,25 @@ class PlansViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toWorkouPlan" {
+            if let destinationVC = segue.destination as? WorkoutPlanViewController {
+                destinationVC.workoutPlan =  selectedWorkoutPlan
+            }
+        }
     }
-    */
 
 }
 
 extension PlansViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        selectedWorkoutPlan = wokoutPlans[indexPath.row]
+        performSegue(withIdentifier: "toWorkouPlan", sender: self)
+
+    }
+    
+    
 }
 
 extension PlansViewController: UITableViewDataSource{

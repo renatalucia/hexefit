@@ -29,6 +29,9 @@
 		94C2AB3326B05A4C005D2E4C /* WorkoutPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3226B05A4C005D2E4C /* WorkoutPlan.swift */; };
 		94C2AB3726B062FD005D2E4C /* PlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3526B062FD005D2E4C /* PlanCell.swift */; };
 		94C2AB3826B062FD005D2E4C /* PlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C2AB3626B062FD005D2E4C /* PlanCell.xib */; };
+		94C2AB3C26B06687005D2E4C /* WorkoutPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3B26B06687005D2E4C /* WorkoutPlanViewController.swift */; };
+		94C2AB3F26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3D26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift */; };
+		94C2AB4026B1A26F005D2E4C /* WorkoutPlanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C2AB3E26B1A26F005D2E4C /* WorkoutPlanTableViewCell.xib */; };
 		96C4DAD608E1541A127FB6E0 /* Pods_hexefit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB942A6BDF385114DBE1D597 /* Pods_hexefit.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +79,9 @@
 		94C2AB3226B05A4C005D2E4C /* WorkoutPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPlan.swift; sourceTree = "<group>"; };
 		94C2AB3526B062FD005D2E4C /* PlanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCell.swift; sourceTree = "<group>"; };
 		94C2AB3626B062FD005D2E4C /* PlanCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanCell.xib; sourceTree = "<group>"; };
+		94C2AB3B26B06687005D2E4C /* WorkoutPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPlanViewController.swift; sourceTree = "<group>"; };
+		94C2AB3D26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPlanTableViewCell.swift; sourceTree = "<group>"; };
+		94C2AB3E26B1A26F005D2E4C /* WorkoutPlanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutPlanTableViewCell.xib; sourceTree = "<group>"; };
 		9AE7CA524C2469EEC957A2A9 /* Pods-hexefitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefitTests.release.xcconfig"; path = "Target Support Files/Pods-hexefitTests/Pods-hexefitTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB942A6BDF385114DBE1D597 /* Pods_hexefit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hexefit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51465A0006C611A13ABD582 /* Pods-hexefit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefit.release.xcconfig"; path = "Target Support Files/Pods-hexefit/Pods-hexefit.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +150,8 @@
 				9426BEBA26A09BA70068B840 /* Main.storyboard */,
 				94C2AB3626B062FD005D2E4C /* PlanCell.xib */,
 				9426BEC226A09BAB0068B840 /* LaunchScreen.storyboard */,
+				94C2AB3D26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift */,
+				94C2AB3E26B1A26F005D2E4C /* WorkoutPlanTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -155,6 +163,7 @@
 				9426BEF226A33C060068B840 /* HistoryViewController.swift */,
 				94C2AB3026B0587F005D2E4C /* PlansViewController.swift */,
 				94C2AB3526B062FD005D2E4C /* PlanCell.swift */,
+				94C2AB3B26B06687005D2E4C /* WorkoutPlanViewController.swift */,
 			);
 			path = controler;
 			sourceTree = "<group>";
@@ -324,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9426BEC426A09BAB0068B840 /* LaunchScreen.storyboard in Resources */,
+				94C2AB4026B1A26F005D2E4C /* WorkoutPlanTableViewCell.xib in Resources */,
 				9426BEE826A09F3C0068B840 /* GoogleService-Info.plist in Resources */,
 				94C2AB3826B062FD005D2E4C /* PlanCell.xib in Resources */,
 				9426BEC126A09BAB0068B840 /* Assets.xcassets in Resources */,
@@ -460,7 +470,9 @@
 			files = (
 				944AF3FF26A5CEFC003DBA7F /* HistoryCell.swift in Sources */,
 				9426BEF526A3400B0068B840 /* HealthKitAssistant.swift in Sources */,
+				94C2AB3F26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift in Sources */,
 				94C2AB2B26ADA820005D2E4C /* UserProfile.swift in Sources */,
+				94C2AB3C26B06687005D2E4C /* WorkoutPlanViewController.swift in Sources */,
 				94C2AB3126B0587F005D2E4C /* PlansViewController.swift in Sources */,
 				94C2AB3326B05A4C005D2E4C /* WorkoutPlan.swift in Sources */,
 				94C2AB3726B062FD005D2E4C /* PlanCell.swift in Sources */,
