@@ -59,10 +59,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
-                                <rect key="frame" x="30" y="138" width="304.5" height="206"/>
+                                <rect key="frame" x="30" y="138" width="354" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="206"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="194" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HoP-Q5-KsU">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -204,7 +204,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                        <rect key="frame" x="160" y="0.0" width="144.5" height="206"/>
+                                        <rect key="frame" x="194" y="0.0" width="160" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -400,22 +400,78 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lGq-fH-pAa">
-                                <rect key="frame" x="0.0" y="24" width="414" height="848"/>
+                                <rect key="frame" x="0.0" y="197" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="264" translatesAutoresizingMaskIntoConstraints="NO" id="6Qy-of-NQw">
+                                <rect key="frame" x="10" y="139" width="300" height="48"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vaw-Ng-G5K">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0i-cu-uBC">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="vIc-0O-eOM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQV-BV-LmP">
+                                                <rect key="frame" x="0.0" y="32" width="300" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="nH6-P8-OYj"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="wEo-9I-Cck" userLabel="Add  set">
+                                <rect key="frame" x="320" y="140" width="74" height="48"/>
+                                <state key="normal">
+                                    <string key="title">Add 
+set</string>
+                                </state>
+                                <connections>
+                                    <action selector="addSetButtonClicked:" destination="Oph-Y1-OIJ" eventType="touchUpInside" id="2nb-Pr-MuQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HWq-4r-fHT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="lGq-fH-pAa" firstAttribute="leading" secondItem="HWq-4r-fHT" secondAttribute="leading" id="Ig0-df-78w"/>
-                            <constraint firstItem="lGq-fH-pAa" firstAttribute="bottom" secondItem="HWq-4r-fHT" secondAttribute="bottom" constant="10" id="Jtk-eO-Fwx"/>
-                            <constraint firstItem="lGq-fH-pAa" firstAttribute="centerY" secondItem="44B-fd-W26" secondAttribute="centerY" id="jXz-KO-r0y"/>
-                            <constraint firstItem="lGq-fH-pAa" firstAttribute="centerX" secondItem="44B-fd-W26" secondAttribute="centerX" id="sSd-69-EL8"/>
+                            <constraint firstItem="wEo-9I-Cck" firstAttribute="top" secondItem="HWq-4r-fHT" secondAttribute="top" constant="52" id="A8V-hc-sSa"/>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="leading" secondItem="HWq-4r-fHT" secondAttribute="leading" id="Lph-Ub-TZL"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="lGq-fH-pAa" secondAttribute="bottom" constant="-59" id="Vqc-Zr-YYk"/>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="top" secondItem="6Qy-of-NQw" secondAttribute="bottom" constant="10" id="cQl-eI-PbX"/>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="centerX" secondItem="44B-fd-W26" secondAttribute="centerX" id="ev4-3F-1Hr"/>
+                            <constraint firstItem="wEo-9I-Cck" firstAttribute="top" secondItem="HWq-4r-fHT" secondAttribute="top" constant="52" id="oyS-ep-5l5"/>
+                            <constraint firstItem="6Qy-of-NQw" firstAttribute="leading" secondItem="HWq-4r-fHT" secondAttribute="leading" constant="10" id="pFx-0i-B7H"/>
+                            <constraint firstItem="wEo-9I-Cck" firstAttribute="leading" secondItem="6Qy-of-NQw" secondAttribute="trailing" constant="10" id="sYa-w5-S7i"/>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="top" secondItem="wEo-9I-Cck" secondAttribute="bottom" constant="9" id="u5C-tB-weM"/>
+                            <constraint firstItem="HWq-4r-fHT" firstAttribute="trailing" secondItem="wEo-9I-Cck" secondAttribute="trailing" constant="20" id="xuo-qW-wcm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2Qz-c3-yus"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="2Qz-c3-yus">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="lVh-QV-hh9">
+                            <connections>
+                                <action selector="editButtonClicked:" destination="Oph-Y1-OIJ" id="6Ch-n7-ccf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addSetButton" destination="wEo-9I-Cck" id="qFW-Lz-mg4"/>
+                        <outlet property="editButton" destination="lVh-QV-hh9" id="CeC-y6-ER3"/>
                         <outlet property="tableView" destination="lGq-fH-pAa" id="nl9-Wz-b9k"/>
+                        <outlet property="workoutDescription" destination="eQV-BV-LmP" id="0d0-aS-4OV"/>
+                        <outlet property="workoutName" destination="I0i-cu-uBC" id="JMH-aX-JHu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyR-mZ-cHf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
