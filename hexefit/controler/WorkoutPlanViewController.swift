@@ -28,12 +28,29 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
                   "XI", "XII", "XIII", "XIV", "XV",
                   "XVI", "XVII", "XVIII", "XIX", "XX"]
     
-    var itemsInSections: Array<Array<String>> = [["Agachamento", "Agachamento isometrico com bola"], ["Agachamento isometrico com bola", "Agachamento com bola"], ["Pernada Alternada"]]
+
+
+    let ws = [
+        WorkoutSet(seqNumber: 1, exercises: [
+                                    WorkoutExercise(name: "Agachamento", details: "3x 8-12"),
+                                    WorkoutExercise(name: "Agachamento isometrico", details: "3x 20 segundos")]),
+        WorkoutSet(seqNumber: 2, exercises: [
+                                        WorkoutExercise(name: "Agachamento com bola", details: "3x 8-12"),
+                                        WorkoutExercise(name: "Agachamento isometrico com bola", details: "3x 20 segundos")]),
+        WorkoutSet(seqNumber: 3, exercises: [
+                                    WorkoutExercise(name: "Pernada", details: "3x 8-12")])
+    ]
     
-    var sections: Array<String> = ["I", "II", "III"]
+    
+
+//
+//    var itemsInSections: Array<Array<String>> = [["Agachamento", "Agachamento isometrico com bola"], ["Agachamento isometrico com bola", "Agachamento com bola"], ["Pernada Alternada"]]
+//    
+//    var sections: Array<String> = ["I", "II", "III"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        workoutPlan?.sets = ws
         tableView.register(UINib(nibName: "WorkoutPlanTableViewCell", bundle: nil), forCellReuseIdentifier: "ExerciseReusableCell")
         print(workoutPlan?.name as Any)
         self.tableView.dataSource = self
@@ -53,17 +70,8 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     @IBAction func addSetButtonClicked(_ sender: UIButton) {
-        var sectionName = ""
-        print(sections.count)
-        if sections.count < romans.count{
-            sectionName = romans[sections.count]
-            print(sectionName)
-        } else {
-            sectionName = String(sections.count + 1)
-        }
-        sections.append(sectionName)
+        workoutPlan?.sets?.append(WorkoutSet(seqNumber: 1, exercises: [WorkoutExercise(name: "New exercise", details: "3x 8-12")]))
         
-        itemsInSections.append(["Add an Execise to the set"])
         
         tableView.reloadData()
     }
@@ -87,7 +95,7 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sections.count
+        return self.workoutPlan?.sets?.count ?? 0
     }
     
     //    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -96,20 +104,20 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
     //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.itemsInSections[section].count
+        return self.workoutPlan?.sets?[section].exercises.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sections[section]
+        return String(section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseReusableCell") as! WorkoutPlanTableViewCell
-        let exercixeName = self.itemsInSections[indexPath.section][indexPath.row]
+        let exercixeName = self.workoutPlan?.sets?[indexPath.section].exercises[indexPath.row].name
         
         cell.exerciseName.text = exercixeName
         
-        cell.exerciseData.text = "3x 8-12"
+        cell.exerciseData.text = self.workoutPlan?.sets?[indexPath.section].exercises[indexPath.row].details
         
         return cell
     }
@@ -150,31 +158,29 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
         return false
     }
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedObject = self.itemsInSections[sourceIndexPath.section][sourceIndexPath.row]
-        itemsInSections[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-        itemsInSections[sourceIndexPath.section].insert(movedObject, at: destinationIndexPath.row)
+        let movedObject =  self.workoutPlan?.sets?[sourceIndexPath.section].exercises[sourceIndexPath.row] ??
+            WorkoutExercise(name: "Exercise name", details: "Number of series and repetitions")
+        
+        //let movedObject = self.itemsInSections[sourceIndexPath.section][sourceIndexPath.row]
+        
+        self.workoutPlan?.sets?[sourceIndexPath.section].exercises.remove(at: sourceIndexPath.row)
+        self.workoutPlan?.sets?[destinationIndexPath.section].exercises.insert(movedObject, at: destinationIndexPath.row)
+        
+        print("After moving")
+        print(workoutPlan?.sets!)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //tableView.beginUpdates()
-            itemsInSections[indexPath.section].remove(at: indexPath.row)
-            //tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            if itemsInSections[indexPath.section].count == 0{
-                sections.remove(at: indexPath.section)
-                print(sections.count)
+            self.workoutPlan?.sets?[indexPath.section].exercises.remove(at: indexPath.row)
+            if self.workoutPlan?.sets?[indexPath.section].exercises.count == 0{
+                self.workoutPlan?.sets?.remove(at: indexPath.section)
   
-                //tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
             }
-            
-            //tableView.endUpdates()
             tableView.reloadData()
         }
         
-        
-        print(itemsInSections[indexPath.section])
-    }
+            }
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath)   {
@@ -192,7 +198,7 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
             if let textField = alert.textFields?[0],
                let newText = textField.text{
                 
-                self.itemsInSections[indexPath.section][indexPath.row] = newText
+                self.workoutPlan?.sets?[indexPath.section].exercises[indexPath.row].name = newText
                 
                 self.tableView.reloadData()
             }
@@ -227,7 +233,8 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
             if let textField = alert.textFields?[0],
                let newText = textField.text{
                 
-                self.itemsInSections[button.tag].append(newText)
+                let w = WorkoutExercise(name: newText, details: "3x 8-12")
+                self.workoutPlan?.sets?[button.tag].exercises.append(w)
                 self.tableView.reloadData()
             }
             

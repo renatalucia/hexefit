@@ -22,9 +22,5 @@ struct WorkoutSet{
 
 struct WorkoutExercise{
     var name: String
-    var reps: Int
-    var series: Int
-    var interval: Int
-    var duration: Int
-    var weight: String
+    var details: String
 }
