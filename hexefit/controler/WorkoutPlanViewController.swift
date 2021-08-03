@@ -91,6 +91,7 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
             addSetButton.isHidden = true
             editButton.title = "Edit"
         }
+        tableView.reloadData()
     }
     
     
@@ -129,24 +130,57 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
                    forSection section: Int){
         
         
-        let button = UIButton(type: .system)
-        
-        button.setTitle("add", for: .normal)
-        //button.setImage(UIImage(named:"Plus"), for: .normal)
-        
-        button.setTitleColor(.systemBlue, for: .normal)
-        
-        button.tag = section
-        
-        
-        button.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(button)
-        let margins = view.layoutMarginsGuide
-        button.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
-        //        button.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 0).isActive = true
+        if isEdit {
+            let button = UIButton(type: .system)
+            button.setTitle("+", for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is no left
+            button.setTitleColor(.systemBlue, for: .normal)
+            button.tag = section
+            button.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+//            view.addSubview(button)
+//            let margins = view.layoutMarginsGuide
+//            button.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
+            
+            let buttonRemove = UIButton(type: .system)
+            buttonRemove.setTitle("-", for: .normal)
+            buttonRemove.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            buttonRemove.setTitleColor(.systemBlue, for: .normal)
+            buttonRemove.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is
+            buttonRemove.tag = section
+            buttonRemove.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
+            buttonRemove.translatesAutoresizingMaskIntoConstraints = false
+//            view.addSubview(buttonRemove)
+//            let marginsRemove = button.layoutMarginsGuide
+//            buttonRemove.trailingAnchor.constraint(equalTo: marginsRemove.trailingAnchor, constant: 50).isActive = true
+            
+            let stackView   = UIStackView()
+            stackView.axis  = NSLayoutConstraint.Axis.horizontal
+            stackView.distribution  = UIStackView.Distribution.equalSpacing
+
+            stackView.alignment = UIStackView.Alignment.top
+
+            stackView.spacing   = 3.0
+
+            stackView.addArrangedSubview(button)
+            stackView.addArrangedSubview(buttonRemove)
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            
+
+
+
+            view.addSubview(stackView)
+            
+            stackView.alignment = .center
+            
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+//            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            
+            let margins = view.layoutMarginsGuide
+            stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 0).isActive = true
+            
+        }
     }
     
     
@@ -214,7 +248,7 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     
-    
+    self.workoutPlan?.sets?[sourceIndexPath.section].exercises.remove(at: sourceIndexPath.row)
     
     
     
