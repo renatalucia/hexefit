@@ -11,9 +11,15 @@ class PlansViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
+    @IBOutlet weak var addPlanButton: UIButton!
+    
+    var isEdit = false
+    
     var selectedWorkoutPlan: WorkoutPlan?
     
-    var wokoutPlans = [
+    var workoutPlans = [
         WorkoutPlan(name: "Lower Body Workout", description: "Created at 29.07.2021", sets: nil),
         WorkoutPlan(name: "Upper Body Workout", description: "Created at 27.07.2021", sets: nil)
     ]
@@ -37,13 +43,82 @@ class PlansViewController: UIViewController {
             }
         }
     }
+    
+    func enterPlanData(at indexPath: IndexPath?=nil, alertTitle: String) {
+        let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Write here the title of your plan"
+            if let path = indexPath{
+                textField.text = self.workoutPlans[path.row].name
+            }
+            
+        }
+        
+        alert.addTextField { (textField) in
+            let placeholderText = "Write here a short description for your plan"
+            textField.placeholder = placeholderText
+            if let path = indexPath{
+                textField.text =  self.workoutPlans[path.row].description
+            }
+            
+        }
+        
+        alert.addAction(UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { action in
+            // What will happen when user presses "Add Plan"
+            
+            if let textFieldName = alert.textFields?[0],
+               let planName = textFieldName.text,
+               let textFieldDescription = alert.textFields?[1],
+               let planDescription = textFieldDescription.text{
+               
+                
+                if let path = indexPath{
+                    self.workoutPlans[path.row].name = planName
+                    self.workoutPlans[path.row].description = planDescription
+                } else {
+                    let newPlan = WorkoutPlan(name: planName, description: planDescription, sets: [])
+                    self.workoutPlans.append(newPlan)
+                }
+                self.tableView.reloadData()
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
 
+    
+    @IBAction func addPlanButtonClicked(_ sender: UIButton) {
+        enterPlanData(alertTitle: "Add Workout Plan")
+    }
+    
+    
+    @IBAction func editButtonClicked(_ sender: UIBarButtonItem) {
+        isEdit.toggle()
+        setEditMode(isEdit: isEdit)
+    }
+        
+    func setEditMode(isEdit: Bool){
+        self.tableView.isEditing = isEdit
+        tableView.allowsSelection = isEdit
+        tableView.allowsSelectionDuringEditing = isEdit
+        addPlanButton.isHidden = !isEdit
+        if isEdit {
+            editButton.title = "Done"
+        } else {
+            editButton.title = "Edit"
+        }
+        tableView.reloadData()
+    }
 }
 
 extension PlansViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        selectedWorkoutPlan = wokoutPlans[indexPath.row]
+        selectedWorkoutPlan = workoutPlans[indexPath.row]
         performSegue(withIdentifier: "toWorkouPlan", sender: self)
 
     }
@@ -53,13 +128,13 @@ extension PlansViewController: UITableViewDelegate{
 
 extension PlansViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return wokoutPlans.count
+        return workoutPlans.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlanReusableCell", for: indexPath) as! PlanCell
-        cell.planName.text = wokoutPlans[indexPath.row].name
-        cell.planDescription.text = wokoutPlans[indexPath.row].description
+        cell.planName.text = workoutPlans[indexPath.row].name
+        cell.planDescription.text = workoutPlans[indexPath.row].description
         return cell
     }
     

@@ -16,7 +16,6 @@ struct WorkoutPlan{
 }
 
 struct WorkoutSet{
-    var seqNumber: Int
     var exercises: [WorkoutExercise]
 }
 

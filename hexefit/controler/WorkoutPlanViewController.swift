@@ -7,13 +7,12 @@
 
 import UIKit
 
-class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    
-    @IBOutlet weak var tableView: UITableView!
+class WorkoutPlanViewController: UIViewController {
     
     var workoutPlan: WorkoutPlan?
     var isEdit = false
+    
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var workoutName: UILabel!
     
@@ -28,25 +27,17 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
                   "XI", "XII", "XIII", "XIV", "XV",
                   "XVI", "XVII", "XVIII", "XIX", "XX"]
     
-
-
     let ws = [
-        WorkoutSet(seqNumber: 1, exercises: [
-                                    WorkoutExercise(name: "Agachamento", details: "3x 8-12"),
-                                    WorkoutExercise(name: "Agachamento isometrico", details: "3x 20 segundos")]),
-        WorkoutSet(seqNumber: 2, exercises: [
-                                        WorkoutExercise(name: "Agachamento com bola", details: "3x 8-12"),
-                                        WorkoutExercise(name: "Agachamento isometrico com bola", details: "3x 20 segundos")]),
-        WorkoutSet(seqNumber: 3, exercises: [
-                                    WorkoutExercise(name: "Pernada", details: "3x 8-12")])
+        WorkoutSet(exercises: [
+                    WorkoutExercise(name: "Agachamento", details: "3x 8-12"),
+                    WorkoutExercise(name: "Agachamento isometrico", details: "3x 20 segundos")]),
+        WorkoutSet(exercises: [
+                    WorkoutExercise(name: "Agachamento com bola", details: "3x 8-12"),
+                    WorkoutExercise(name: "Agachamento isometrico com bola", details: "3x 20 segundos")]),
+        WorkoutSet(exercises: [
+                    WorkoutExercise(name: "Pernada", details: "3x 8-12")])
     ]
     
-    
-
-//
-//    var itemsInSections: Array<Array<String>> = [["Agachamento", "Agachamento isometrico com bola"], ["Agachamento isometrico com bola", "Agachamento com bola"], ["Pernada Alternada"]]
-//    
-//    var sections: Array<String> = ["I", "II", "III"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,20 +50,24 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
         
         workoutName.text = workoutPlan?.name
         workoutDescription.text = workoutPlan?.description
+        
+        let changePlanTitleTap = UITapGestureRecognizer(target: self, action: #selector(changePlanTapFunction))
+        workoutName.isUserInteractionEnabled = true
+        workoutDescription.isUserInteractionEnabled = true
+        workoutName.addGestureRecognizer(changePlanTitleTap)
+        workoutDescription.addGestureRecognizer(changePlanTitleTap)
+
     }
     
     @IBAction func editButtonClicked(_ sender: UIBarButtonItem) {
         isEdit.toggle()
         setEditMode(isEdit: isEdit)
         print(isEdit)
-
+        
     }
     
-    
-    @IBAction func addSetButtonClicked(_ sender: UIButton) {
-        workoutPlan?.sets?.append(WorkoutSet(seqNumber: 1, exercises: [WorkoutExercise(name: "New exercise", details: "3x 8-12")]))
-        
-        
+    @IBAction func addSetClicked(_ sender: UIButton) {
+        workoutPlan?.sets?.append(WorkoutSet(exercises: []))
         tableView.reloadData()
     }
     
@@ -94,22 +89,138 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.reloadData()
     }
     
+    @objc func changePlanTapFunction(sender:UITapGestureRecognizer) {
+        enterWorkoutTitle()
+    }
+    
+    
+    // method called when the add exercise button inside the section header is pressed
+    @objc func addExerciseToSection(button: UIButton) {
+        addExercise(sectionButton: button)
+    }
+    
+    
+    func addExercise(sectionButton button: UIButton){
+        enterExerciseData(sectionButton: button, alertTitle: "Add Exercise")
+    }
+    
+    func editExercise(at indexPath: IndexPath){
+        enterExerciseData(at: indexPath, alertTitle: "Edit Exercise")
+    }
+    
+    // Method called when an exercise is being edited (need to Pass the indexPass parameter)
+    // or inserted (need to Pass the Button parameter)
+    // Shoud be called only inside methods addNewExercise and EditExercise
+    func enterExerciseData(at indexPath: IndexPath? = nil, sectionButton: UIButton? = nil, alertTitle: String){
+        
+        let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Write here your exercise name"
+            if let path = indexPath,
+               let exerciseName = self.workoutPlan?.sets?[path.section].exercises[path.row].name {
+                textField.text = exerciseName
+            }
+            
+        }
+        
+        alert.addTextField { (textField) in
+            let placeholderText = "Exercise details. Ex. 3x 10-12 5kg"
+            textField.placeholder = placeholderText
+            if let path = indexPath,
+               let exerciseDetails = self.workoutPlan?.sets?[path.section].exercises[path.row].details{
+                textField.text =  exerciseDetails
+            }
+            
+        }
+        
+        alert.addAction(UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { action in
+            // What will happen when user presses "Add Item"
+            
+            if let textFieldName = alert.textFields?[0],
+               let exerciseName = textFieldName.text,
+               let textFieldDetails = alert.textFields?[1],
+               let exerciseDetails = textFieldDetails.text{
+               
+                
+                if let path = indexPath{
+                    self.workoutPlan?.sets?[path.section].exercises[path.row].name = exerciseName
+                    self.workoutPlan?.sets?[path.section].exercises[path.row].details = exerciseDetails
+                } else if let button = sectionButton {
+                    let w = WorkoutExercise(name: exerciseName, details: exerciseDetails)
+                    self.workoutPlan?.sets?[button.tag].exercises.append(w)
+                }
+                self.tableView.reloadData()
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func enterWorkoutTitle(){
+        let alert = UIAlertController(title: "Edit Plan", message: "", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Write here the name of your plan"
+            textField.text = self.workoutPlan?.name
+            
+        }
+        
+        alert.addTextField { (textField) in
+            let placeholderText = "Write here a description for your plan"
+            textField.placeholder = placeholderText
+            textField.text = self.workoutPlan?.description
+        }
+        
+        alert.addAction(UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { action in
+            
+            if let textFieldName = alert.textFields?[0],
+               let planName = textFieldName.text,
+               let textFieldDescription = alert.textFields?[1],
+               let planDescription = textFieldDescription.text{
+                self.workoutPlan?.name = planName
+                self.workoutPlan?.description = planDescription
+                self.workoutName.text = self.workoutPlan?.name
+                self.workoutDescription.text = self.workoutPlan?.description
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        }))
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func deleteExercise(at indexPath: IndexPath){
+        self.workoutPlan?.sets?[indexPath.section].exercises.remove(at: indexPath.row)
+        if self.workoutPlan?.sets?[indexPath.section].exercises.count == 0{
+            self.workoutPlan?.sets?.remove(at: indexPath.section)
+        }
+    }
+    
+    
+}
+
+
+// MARK: - TableView Data Source Methods.
+
+extension WorkoutPlanViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.workoutPlan?.sets?.count ?? 0
     }
-    
-    //    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    //        print("number of sections: \(sections.count)")
-    //        return self.sections.count
-    //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.workoutPlan?.sets?[section].exercises.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(section)
+        let title = (section < romans.count) ? romans[section] : String(section+1)
+        return title
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,8 +234,30 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+}
+
+
+// MARK: - TableView Delegate Methods.
+extension WorkoutPlanViewController:  UITableViewDelegate {
     
     
+    // Method called when delete button is pressed
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteExercise(at: indexPath)
+            tableView.reloadData()
+        }
+    }
+    
+    // Method called when a row is selected
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath)   {
+        editExercise(at: indexPath)
+        
+    }
+    
+    
+    // Method called to configure the header of the sections
     func tableView(_ tableView: UITableView,
                    willDisplayHeaderView view: UIView,
                    forSection section: Int){
@@ -132,155 +265,38 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
         
         if isEdit {
             let button = UIButton(type: .system)
-            button.setTitle("+", for: .normal)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            button.setTitle("add exercise", for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is no left
             button.setTitleColor(.systemBlue, for: .normal)
             button.tag = section
             button.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
-//            view.addSubview(button)
-//            let margins = view.layoutMarginsGuide
-//            button.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
-            
-            let buttonRemove = UIButton(type: .system)
-            buttonRemove.setTitle("-", for: .normal)
-            buttonRemove.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-            buttonRemove.setTitleColor(.systemBlue, for: .normal)
-            buttonRemove.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is
-            buttonRemove.tag = section
-            buttonRemove.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
-            buttonRemove.translatesAutoresizingMaskIntoConstraints = false
-//            view.addSubview(buttonRemove)
-//            let marginsRemove = button.layoutMarginsGuide
-//            buttonRemove.trailingAnchor.constraint(equalTo: marginsRemove.trailingAnchor, constant: 50).isActive = true
-            
-            let stackView   = UIStackView()
-            stackView.axis  = NSLayoutConstraint.Axis.horizontal
-            stackView.distribution  = UIStackView.Distribution.equalSpacing
-
-            stackView.alignment = UIStackView.Alignment.top
-
-            stackView.spacing   = 3.0
-
-            stackView.addArrangedSubview(button)
-            stackView.addArrangedSubview(buttonRemove)
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            
-
-
-
-            view.addSubview(stackView)
-            
-            stackView.alignment = .center
-            
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            
+            view.addSubview(button)
             let margins = view.layoutMarginsGuide
-            stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 0).isActive = true
+            button.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
+            
             
         }
     }
     
-    
-    //    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-    //        return .none
-    //    }
-    
+    // Asks the delegate whether the background of the specified row should be indented while the table view is in editing mode.
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
+    
+    // Method called when exercise is moved in the table
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedObject =  self.workoutPlan?.sets?[sourceIndexPath.section].exercises[sourceIndexPath.row] ??
-            WorkoutExercise(name: "Exercise name", details: "Number of series and repetitions")
+        if let movedObject =  self.workoutPlan?.sets?[sourceIndexPath.section].exercises[sourceIndexPath.row]{
+            
+            self.workoutPlan?.sets?[destinationIndexPath.section].exercises.insert(movedObject, at: destinationIndexPath.row)
+            
+            deleteExercise(at: sourceIndexPath)
+        }
+        tableView.reloadData()
         
-        //let movedObject = self.itemsInSections[sourceIndexPath.section][sourceIndexPath.row]
-        
-        self.workoutPlan?.sets?[sourceIndexPath.section].exercises.remove(at: sourceIndexPath.row)
-        self.workoutPlan?.sets?[destinationIndexPath.section].exercises.insert(movedObject, at: destinationIndexPath.row)
-        
-        print("After moving")
-        print(workoutPlan?.sets!)
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            self.workoutPlan?.sets?[indexPath.section].exercises.remove(at: indexPath.row)
-            if self.workoutPlan?.sets?[indexPath.section].exercises.count == 0{
-                self.workoutPlan?.sets?.remove(at: indexPath.section)
-  
-            }
-            tableView.reloadData()
-        }
-        
-            }
-    
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath)   {
-        
-        let alert = UIAlertController(title:"Edit Exercise", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Write here your exercise name"
-        }
-        
-        
-        alert.addAction(UIAlertAction(title: "Edit Exercise", style: UIAlertAction.Style.default, handler: { action in
-            // What will happen when user presses "Add Item"
-            
-            if let textField = alert.textFields?[0],
-               let newText = textField.text{
-                
-                self.workoutPlan?.sets?[indexPath.section].exercises[indexPath.row].name = newText
-                
-                self.tableView.reloadData()
-            }
-            
-            
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-          }))
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
-    
-    
-//    self.workoutPlan?.sets?[sourceIndexPath.section].exercises.remove(at: sourceIndexPath.row)
-    
-    
-    
-    @objc func addExerciseToSection(button: UIButton) {
-        
-        let alert = UIAlertController(title:"Add new Exercise", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Write here your exercise name"
-        }
-        
-        
-        alert.addAction(UIAlertAction(title: "Add Exercise", style: UIAlertAction.Style.default, handler: { action in
-            // What will happen when user presses "Add Item"
-            
-            if let textField = alert.textFields?[0],
-               let newText = textField.text{
-                
-                let w = WorkoutExercise(name: newText, details: "3x 8-12")
-                self.workoutPlan?.sets?[button.tag].exercises.append(w)
-                self.tableView.reloadData()
-            }
-            
-            
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-          }))
-        
-        present(alert, animated: true, completion: nil)
-        
-    }
     
     
 }

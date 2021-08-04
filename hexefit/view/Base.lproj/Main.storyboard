@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="height" constant="500" id="CNm-ZE-3GJ"/>
                                 </constraints>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7b-rK-itu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7b-rK-itu">
                                 <rect key="frame" x="92" y="763" width="191" height="79"/>
                                 <state key="normal" title="WorkoutPlans" image="fitwitch"/>
                                 <connections>
@@ -35,6 +35,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Pyp-86-yNb" firstAttribute="centerX" secondItem="oXl-k9-GDq" secondAttribute="centerX" id="5B5-iR-pFU"/>
+                            <constraint firstItem="u7b-rK-itu" firstAttribute="leading" secondItem="OTv-vv-I2y" secondAttribute="leading" constant="92" id="bDb-2c-2E2"/>
                             <constraint firstItem="OTv-vv-I2y" firstAttribute="bottom" secondItem="u7b-rK-itu" secondAttribute="bottom" constant="20" id="cZK-Z1-dQb"/>
                             <constraint firstItem="Pyp-86-yNb" firstAttribute="top" secondItem="OTv-vv-I2y" secondAttribute="top" constant="20" id="ekb-rP-Xwf"/>
                             <constraint firstItem="Pyp-86-yNb" firstAttribute="leading" secondItem="oXl-k9-GDq" secondAttribute="leadingMargin" id="qAh-70-m1h"/>
@@ -59,10 +60,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
-                                <rect key="frame" x="30" y="138" width="354" height="206"/>
+                                <rect key="frame" x="30" y="138" width="304.5" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
-                                        <rect key="frame" x="0.0" y="0.0" width="194" height="206"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="144.5" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HoP-Q5-KsU">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -204,7 +205,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                        <rect key="frame" x="194" y="0.0" width="160" height="206"/>
+                                        <rect key="frame" x="144.5" y="0.0" width="160" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -372,17 +373,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sge-w5-Hp5">
-                                <rect key="frame" x="0.0" y="88" width="414" height="793"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sge-w5-Hp5">
+                                <rect key="frame" x="0.0" y="169" width="414" height="663"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="163" translatesAutoresizingMaskIntoConstraints="NO" id="ONc-RZ-UuJ">
+                                <rect key="frame" x="19" y="123" width="375" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="My Workouts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ohj-VN-8cX">
+                                        <rect key="frame" x="0.0" y="0.0" width="115.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NQ-7I-qe2">
+                                        <rect key="frame" x="278.5" y="0.0" width="96.5" height="30"/>
+                                        <state key="normal" title="Add Plan"/>
+                                        <connections>
+                                            <action selector="addPlanButtonClicked:" destination="SDV-3R-UDI" eventType="touchUpInside" id="ZtB-pP-vIc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Yf3-0e-zYM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ONc-RZ-UuJ" firstAttribute="leading" secondItem="Yf3-0e-zYM" secondAttribute="leading" constant="19" id="09W-ea-Zd1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="sge-w5-Hp5" secondAttribute="bottom" constant="-19" id="BF5-o1-mwd"/>
+                            <constraint firstItem="sge-w5-Hp5" firstAttribute="leading" secondItem="Yf3-0e-zYM" secondAttribute="leading" id="LLd-vc-LiU"/>
+                            <constraint firstItem="ONc-RZ-UuJ" firstAttribute="top" secondItem="Yf3-0e-zYM" secondAttribute="top" constant="35" id="Rl5-hl-ggh"/>
+                            <constraint firstItem="sge-w5-Hp5" firstAttribute="centerX" secondItem="Eco-FP-piY" secondAttribute="centerX" id="XDd-Q6-596"/>
+                            <constraint firstItem="Yf3-0e-zYM" firstAttribute="trailing" secondItem="ONc-RZ-UuJ" secondAttribute="trailing" constant="20" id="pVb-Qa-J8l"/>
+                            <constraint firstItem="sge-w5-Hp5" firstAttribute="top" secondItem="ONc-RZ-UuJ" secondAttribute="bottom" constant="16" id="qCl-VT-bHO"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bHi-zz-r8W"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="bHi-zz-r8W">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="36P-Vs-opH">
+                            <connections>
+                                <action selector="editButtonClicked:" destination="SDV-3R-UDI" id="F8G-EZ-3jl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addPlanButton" destination="3NQ-7I-qe2" id="Bzb-Nr-O5g"/>
+                        <outlet property="editButton" destination="36P-Vs-opH" id="sgZ-c9-G4t"/>
                         <outlet property="tableView" destination="sge-w5-Hp5" id="2F9-Lf-19O"/>
                         <segue destination="Oph-Y1-OIJ" kind="show" identifier="toWorkouPlan" id="UnD-pq-Wgs"/>
                     </connections>
@@ -403,58 +440,54 @@
                                 <rect key="frame" x="0.0" y="197" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="264" translatesAutoresizingMaskIntoConstraints="NO" id="6Qy-of-NQw">
-                                <rect key="frame" x="10" y="139" width="300" height="48"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="6Qy-of-NQw">
+                                <rect key="frame" x="10" y="139" width="394" height="48"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vaw-Ng-G5K">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="48"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0i-cu-uBC">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="250" height="24"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="vIc-0O-eOM"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="vIc-0O-eOM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQV-BV-LmP">
-                                                <rect key="frame" x="0.0" y="32" width="300" height="16"/>
+                                                <rect key="frame" x="0.0" y="32" width="250" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="nH6-P8-OYj"/>
-                                        </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYk-lu-Fir">
+                                        <rect key="frame" x="288" y="0.0" width="106" height="48"/>
+                                        <state key="normal" title="Add Set"/>
+                                        <connections>
+                                            <action selector="addSetClicked:" destination="Oph-Y1-OIJ" eventType="touchUpInside" id="qiH-61-r0b"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="TYk-lu-Fir" secondAttribute="trailing" id="ULm-l4-TX7"/>
+                                </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="wEo-9I-Cck" userLabel="Add  set">
-                                <rect key="frame" x="320" y="140" width="74" height="48"/>
-                                <state key="normal">
-                                    <string key="title">Add 
-set</string>
-                                </state>
-                                <connections>
-                                    <action selector="addSetButtonClicked:" destination="Oph-Y1-OIJ" eventType="touchUpInside" id="2nb-Pr-MuQ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HWq-4r-fHT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wEo-9I-Cck" firstAttribute="top" secondItem="HWq-4r-fHT" secondAttribute="top" constant="52" id="A8V-hc-sSa"/>
+                            <constraint firstItem="lGq-fH-pAa" firstAttribute="top" secondItem="6Qy-of-NQw" secondAttribute="bottom" constant="10" id="20l-ew-1zi"/>
                             <constraint firstItem="lGq-fH-pAa" firstAttribute="leading" secondItem="HWq-4r-fHT" secondAttribute="leading" id="Lph-Ub-TZL"/>
+                            <constraint firstItem="6Qy-of-NQw" firstAttribute="top" secondItem="HWq-4r-fHT" secondAttribute="top" constant="51" id="O6u-RB-e0D"/>
                             <constraint firstAttribute="bottomMargin" secondItem="lGq-fH-pAa" secondAttribute="bottom" constant="-59" id="Vqc-Zr-YYk"/>
                             <constraint firstItem="lGq-fH-pAa" firstAttribute="top" secondItem="6Qy-of-NQw" secondAttribute="bottom" constant="10" id="cQl-eI-PbX"/>
                             <constraint firstItem="lGq-fH-pAa" firstAttribute="centerX" secondItem="44B-fd-W26" secondAttribute="centerX" id="ev4-3F-1Hr"/>
-                            <constraint firstItem="wEo-9I-Cck" firstAttribute="top" secondItem="HWq-4r-fHT" secondAttribute="top" constant="52" id="oyS-ep-5l5"/>
+                            <constraint firstItem="6Qy-of-NQw" firstAttribute="top" secondItem="HWq-4r-fHT" secondAttribute="top" constant="51" id="mZW-Fb-wdS"/>
+                            <constraint firstItem="HWq-4r-fHT" firstAttribute="trailing" secondItem="6Qy-of-NQw" secondAttribute="trailing" constant="10" id="nfJ-8G-WCi"/>
                             <constraint firstItem="6Qy-of-NQw" firstAttribute="leading" secondItem="HWq-4r-fHT" secondAttribute="leading" constant="10" id="pFx-0i-B7H"/>
-                            <constraint firstItem="wEo-9I-Cck" firstAttribute="leading" secondItem="6Qy-of-NQw" secondAttribute="trailing" constant="10" id="sYa-w5-S7i"/>
-                            <constraint firstItem="lGq-fH-pAa" firstAttribute="top" secondItem="wEo-9I-Cck" secondAttribute="bottom" constant="9" id="u5C-tB-weM"/>
-                            <constraint firstItem="HWq-4r-fHT" firstAttribute="trailing" secondItem="wEo-9I-Cck" secondAttribute="trailing" constant="20" id="xuo-qW-wcm"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -467,7 +500,7 @@ set</string>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addSetButton" destination="wEo-9I-Cck" id="qFW-Lz-mg4"/>
+                        <outlet property="addSetButton" destination="TYk-lu-Fir" id="GNM-W1-Jrz"/>
                         <outlet property="editButton" destination="lVh-QV-hh9" id="CeC-y6-ER3"/>
                         <outlet property="tableView" destination="lGq-fH-pAa" id="nl9-Wz-b9k"/>
                         <outlet property="workoutDescription" destination="eQV-BV-LmP" id="0d0-aS-4OV"/>
