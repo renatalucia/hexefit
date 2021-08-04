@@ -10,6 +10,7 @@ import UIKit
 class WorkoutPlanViewController: UIViewController {
     
     var workoutPlan: WorkoutPlan?
+    var workout: Workout?
     var isEdit = false
     
     @IBOutlet weak var tableView: UITableView!

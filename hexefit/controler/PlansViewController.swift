@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PlansViewController: UIViewController {
 
@@ -17,12 +18,16 @@ class PlansViewController: UIViewController {
     
     var isEdit = false
     
-    var selectedWorkoutPlan: WorkoutPlan?
+    var selectedWorkoutPlan: Workout?
     
-    var workoutPlans = [
-        WorkoutPlan(name: "Lower Body Workout", description: "Created at 29.07.2021", sets: nil),
-        WorkoutPlan(name: "Upper Body Workout", description: "Created at 27.07.2021", sets: nil)
-    ]
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+//    var workoutPlans = [
+//        WorkoutPlan(name: "Lower Body Workout", description: "Created at 29.07.2021", sets: nil),
+//        WorkoutPlan(name: "Upper Body Workout", description: "Created at 27.07.2021", sets: nil)
+//    ]
+    
+    var workoutPlans : [Workout] = []
     
     
     override func viewDidLoad() {
@@ -32,6 +37,8 @@ class PlansViewController: UIViewController {
 
         
         tableView.register(UINib(nibName: "PlanCell", bundle: nil), forCellReuseIdentifier: "PlanReusableCell")
+        
+        loadWorkouts()
 
         // Do any additional setup after loading the view.
     }
@@ -39,7 +46,7 @@ class PlansViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toWorkouPlan" {
             if let destinationVC = segue.destination as? WorkoutPlanViewController {
-                destinationVC.workoutPlan =  selectedWorkoutPlan
+                destinationVC.workout =  selectedWorkoutPlan
             }
         }
     }
@@ -75,10 +82,20 @@ class PlansViewController: UIViewController {
                 
                 if let path = indexPath{
                     self.workoutPlans[path.row].name = planName
-                    self.workoutPlans[path.row].description = planDescription
+//                    self.workoutPlans[path.row].description = planDescription
                 } else {
-                    let newPlan = WorkoutPlan(name: planName, description: planDescription, sets: [])
-                    self.workoutPlans.append(newPlan)
+//                    let newPlan = WorkoutPlan(name: planName, description: planDescription, sets: [])
+//                    self.workoutPlans.append(newPlan)
+                    let newWorkout = Workout(context: self.context)
+                    newWorkout.name = planName
+                    newWorkout.desc = planDescription
+                    do{
+                        try
+                            self.context.save()
+                    } catch {
+                            print("Error saving to core data")
+                    }
+                        
                 }
                 self.tableView.reloadData()
             }
@@ -89,10 +106,22 @@ class PlansViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    func loadWorkouts(){
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        do{
+            try workoutPlans = context.fetch(request)
+        } catch {
+            print("Error Loading Data")
+        }
+        tableView.reloadData()
+    }
+    
 
     
     @IBAction func addPlanButtonClicked(_ sender: UIButton) {
         enterPlanData(alertTitle: "Add Workout Plan")
+        loadWorkouts()
     }
     
     
@@ -118,7 +147,7 @@ class PlansViewController: UIViewController {
 extension PlansViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        selectedWorkoutPlan = workoutPlans[indexPath.row]
+        selectedWorkoutPlan = workoutPlans[indexPath.row] as! Workout
         performSegue(withIdentifier: "toWorkouPlan", sender: self)
 
     }
@@ -134,7 +163,7 @@ extension PlansViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlanReusableCell", for: indexPath) as! PlanCell
         cell.planName.text = workoutPlans[indexPath.row].name
-        cell.planDescription.text = workoutPlans[indexPath.row].description
+        cell.planDescription.text = workoutPlans[indexPath.row].desc
         return cell
     }
     

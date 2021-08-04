@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		313049C0B4E2756B29C3C9FD /* Pods_hexefit_hexefitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5655C90C4A258F93845078B8 /* Pods_hexefit_hexefitUITests.framework */; };
 		8311F2EE968A8A0516681B2E /* Pods_hexefitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D1EA8B46612D9A09267843 /* Pods_hexefitTests.framework */; };
+		940FBAE826BAF5BE00F63B45 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 940FBAE626BAF5BE00F63B45 /* DataModel.xcdatamodeld */; };
 		9426BEB526A09BA70068B840 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEB426A09BA70068B840 /* AppDelegate.swift */; };
 		9426BEB726A09BA70068B840 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9426BEB626A09BA70068B840 /* SceneDelegate.swift */; };
 		9426BEBC26A09BA70068B840 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9426BEBA26A09BA70068B840 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		1700ACA8E6457D28518E8E6F /* Pods-hexefit-hexefitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefit-hexefitUITests.release.xcconfig"; path = "Target Support Files/Pods-hexefit-hexefitUITests/Pods-hexefit-hexefitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		38D1EA8B46612D9A09267843 /* Pods_hexefitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hexefitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5655C90C4A258F93845078B8 /* Pods_hexefit_hexefitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hexefit_hexefitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		940FBAE726BAF5BE00F63B45 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		9426BEB126A09BA70068B840 /* hexefit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hexefit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9426BEB426A09BA70068B840 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9426BEB626A09BA70068B840 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		941D0E5E26AAE6FA003AEC23 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				940FBAE626BAF5BE00F63B45 /* DataModel.xcdatamodeld */,
 				9426BEF426A3400B0068B840 /* HealthKitAssistant.swift */,
 				944CADBC26A6BE6900BDB358 /* HexWorkout.swift */,
 				94C2AB2A26ADA820005D2E4C /* UserProfile.swift */,
@@ -471,6 +474,7 @@
 				944AF3FF26A5CEFC003DBA7F /* HistoryCell.swift in Sources */,
 				9426BEF526A3400B0068B840 /* HealthKitAssistant.swift in Sources */,
 				94C2AB3F26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift in Sources */,
+				940FBAE826BAF5BE00F63B45 /* DataModel.xcdatamodeld in Sources */,
 				94C2AB2B26ADA820005D2E4C /* UserProfile.swift in Sources */,
 				94C2AB3C26B06687005D2E4C /* WorkoutPlanViewController.swift in Sources */,
 				94C2AB3126B0587F005D2E4C /* PlansViewController.swift in Sources */,
@@ -821,6 +825,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		940FBAE626BAF5BE00F63B45 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				940FBAE726BAF5BE00F63B45 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 940FBAE726BAF5BE00F63B45 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		9426BEBD26A09BA70068B840 /* hexefit.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
