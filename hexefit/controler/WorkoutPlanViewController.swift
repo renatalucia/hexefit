@@ -248,7 +248,7 @@ class WorkoutPlanViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     
-    self.workoutPlan?.sets?[sourceIndexPath.section].exercises.remove(at: sourceIndexPath.row)
+//    self.workoutPlan?.sets?[sourceIndexPath.section].exercises.remove(at: sourceIndexPath.row)
     
     
     
