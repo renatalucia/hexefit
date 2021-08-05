@@ -56,6 +56,7 @@ class WorkoutPlanViewController: UIViewController {
     
     func loadSetsAndExercises(){
         workoutSets = workout?.hasSets?.allObjects as? [SetWorkout]
+        workoutSets?.sort{ $0.order < $1.order}
         exercises = []
         if let safeWorkoutSets = workoutSets{
             for wSet in safeWorkoutSets{
@@ -65,16 +66,17 @@ class WorkoutPlanViewController: UIViewController {
                 }
             }
         }
-//
-//        @FetchRequest(entity: Book.entity(), sortDescriptors: [
-//            NSSortDescriptor(keyPath: \Book.title, ascending: true),
-//            NSSortDescriptor(keyPath: \Book.author, ascending: true)
-//        ]) var books: FetchedResults<Book>
     }
     
 
     func deleteExerciseFromSet(exercise: Exercise, wSet: SetWorkout){
+        let currentSet = exercise.belongsToSet
         exercise.belongsToSet = nil
+        if let cSet = currentSet, let setExercises = currentSet?.hasExercises {
+            if setExercises.count == 0{
+                context.delete(cSet)
+            }
+        }
         saveCDContext()
     }
     
@@ -107,6 +109,9 @@ class WorkoutPlanViewController: UIViewController {
     @IBAction func addSetClicked(_ sender: UIButton) {
         let newSet = SetWorkout(context: context)
         newSet.belongsToWorkout = workout
+        if let order = workoutSets?.count{
+            newSet.order = Int16(order)
+        }
         saveCDContext()
         loadSetsAndExercises()
         tableView.reloadData()
@@ -127,6 +132,7 @@ class WorkoutPlanViewController: UIViewController {
             addSetButton.isHidden = true
             editButton.title = "Edit"
         }
+        // loadSetsAndExercises()
         tableView.reloadData()
     }
     
@@ -302,12 +308,18 @@ extension WorkoutPlanViewController:  UITableViewDelegate {
     }
     
     
-    // Method called to configure the header of the sections
+ //    Method called to configure the header of the sections
     func tableView(_ tableView: UITableView,
                    willDisplayHeaderView view: UIView,
                    forSection section: Int){
+//    func tableView(_ tableView: UITableView,
+//                   viewForHeaderInSection section: Int) -> UIView?{
         
-        
+        print("viewForHeaderInSection")
+        print(isEdit)
+        if view.subviews.count > 0{
+            
+        }
         if isEdit {
             let button = UIButton(type: .system)
             button.setTitle("add exercise", for: .normal)
@@ -317,6 +329,7 @@ extension WorkoutPlanViewController:  UITableViewDelegate {
             button.tag = section
             button.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
+            button.isHidden = !isEdit
             view.addSubview(button)
             let margins = view.layoutMarginsGuide
             button.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
@@ -340,15 +353,26 @@ extension WorkoutPlanViewController:  UITableViewDelegate {
             exercises?[destinationIndexPath.section].insert(movedObject, at: destinationIndexPath.row)
             
             // update attribute order based on new indexes
-            for i in 0...exercises![sourceIndexPath.section].count-1{
-                exercises![sourceIndexPath.section][i].order = Int16(i)
+            if exercises![sourceIndexPath.section].count > 0{
+                for i in 0...exercises![sourceIndexPath.section].count-1{
+                    exercises![sourceIndexPath.section][i].order = Int16(i)
+                }
             }
-            for i in 0...exercises![destinationIndexPath.section].count-1{
-                exercises![destinationIndexPath.section][i].order = Int16(i)
+            if exercises![destinationIndexPath.section].count > 0{
+                for i in 0...exercises![destinationIndexPath.section].count-1{
+                    exercises![destinationIndexPath.section][i].order = Int16(i)
+                }
             }
             
             // Update DataBase
             movedObject.belongsToSet = targetSet
+            
+            if let wset = workoutSets?[sourceIndexPath.section]{
+                if wset.hasExercises?.count == 0{
+                    context.delete(wset)
+                }
+            }
+            
             saveCDContext()
         }
         self.loadSetsAndExercises()
