@@ -315,26 +315,30 @@ extension WorkoutPlanViewController:  UITableViewDelegate {
 //    func tableView(_ tableView: UITableView,
 //                   viewForHeaderInSection section: Int) -> UIView?{
         
-        print("viewForHeaderInSection")
-        print(isEdit)
+
+        var button: UIButton? = nil
         if view.subviews.count > 0{
-            
+            for subview in view.subviews{
+                if let btn = subview as? UIButton{
+                    btn.isHidden = !isEdit
+                    button = btn
+                }
+            }
         }
         if isEdit {
-            let button = UIButton(type: .system)
-            button.setTitle("add exercise", for: .normal)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is no left
-            button.setTitleColor(.systemBlue, for: .normal)
-            button.tag = section
-            button.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.isHidden = !isEdit
-            view.addSubview(button)
-            let margins = view.layoutMarginsGuide
-            button.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
-            
-            
+            if button == nil{
+                let button = UIButton(type: .system)
+                button.setTitle("add exercise", for: .normal)
+                button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is no left
+                button.setTitleColor(.systemBlue, for: .normal)
+                button.tag = section
+                button.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
+                button.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(button)
+                let margins = view.layoutMarginsGuide
+                button.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
+            }
         }
     }
     
