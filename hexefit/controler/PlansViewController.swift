@@ -22,12 +22,9 @@ class PlansViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-//    var workoutPlans = [
-//        WorkoutPlan(name: "Lower Body Workout", description: "Created at 29.07.2021", sets: nil),
-//        WorkoutPlan(name: "Upper Body Workout", description: "Created at 27.07.2021", sets: nil)
-//    ]
+
     
-    var workoutPlans : [Workout] = []
+    var workouts : [Workout] = []
     
     
     override func viewDidLoad() {
@@ -51,13 +48,50 @@ class PlansViewController: UIViewController {
         }
     }
     
+    func loadWorkouts(){
+        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
+        do{
+            try workouts = context.fetch(request)
+        } catch {
+            print("Error Loading Data")
+        }
+        tableView.reloadData()
+    }
+    
+    func saveCDContext() {
+        do{
+            try
+                self.context.save()
+        } catch {
+                print("Error saving to core data")
+        }
+    }
+    
+    func deleteWorkout(at indexPath: IndexPath){
+        print("deleteWorkout")
+        let w = self.workouts[indexPath.row]
+        context.delete(w)
+        loadWorkouts()
+    }
+    
+    func setEditMode(isEdit: Bool){
+        self.tableView.isEditing = isEdit
+        addPlanButton.isHidden = !isEdit
+        if isEdit {
+            editButton.title = "Done"
+        } else {
+            editButton.title = "Edit"
+        }
+        tableView.reloadData()
+    }
+    
     func enterPlanData(at indexPath: IndexPath?=nil, alertTitle: String) {
         let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: .alert)
         
         alert.addTextField { (textField) in
             textField.placeholder = "Write here the title of your plan"
             if let path = indexPath{
-                textField.text = self.workoutPlans[path.row].name
+                textField.text = self.workouts[path.row].name
             }
             
         }
@@ -66,7 +100,7 @@ class PlansViewController: UIViewController {
             let placeholderText = "Write here a short description for your plan"
             textField.placeholder = placeholderText
             if let path = indexPath{
-                textField.text =  self.workoutPlans[path.row].description
+                textField.text =  self.workouts[path.row].description
             }
             
         }
@@ -81,23 +115,15 @@ class PlansViewController: UIViewController {
                
                 
                 if let path = indexPath{
-                    self.workoutPlans[path.row].name = planName
-//                    self.workoutPlans[path.row].description = planDescription
+                    self.workouts[path.row].name = planName
+                    self.workouts[path.row].desc = planDescription
                 } else {
-//                    let newPlan = WorkoutPlan(name: planName, description: planDescription, sets: [])
-//                    self.workoutPlans.append(newPlan)
                     let newWorkout = Workout(context: self.context)
                     newWorkout.name = planName
                     newWorkout.desc = planDescription
-                    do{
-                        try
-                            self.context.save()
-                    } catch {
-                            print("Error saving to core data")
-                    }
-                        
                 }
-                self.tableView.reloadData()
+                self.saveCDContext()
+                self.loadWorkouts()
             }
         }))
         
@@ -107,21 +133,9 @@ class PlansViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func loadWorkouts(){
-        let request: NSFetchRequest<Workout> = Workout.fetchRequest()
-        do{
-            try workoutPlans = context.fetch(request)
-        } catch {
-            print("Error Loading Data")
-        }
-        tableView.reloadData()
-    }
-    
-
     
     @IBAction func addPlanButtonClicked(_ sender: UIButton) {
         enterPlanData(alertTitle: "Add Workout Plan")
-        loadWorkouts()
     }
     
     
@@ -129,41 +143,35 @@ class PlansViewController: UIViewController {
         isEdit.toggle()
         setEditMode(isEdit: isEdit)
     }
-        
-    func setEditMode(isEdit: Bool){
-        self.tableView.isEditing = isEdit
-        tableView.allowsSelection = isEdit
-        tableView.allowsSelectionDuringEditing = isEdit
-        addPlanButton.isHidden = !isEdit
-        if isEdit {
-            editButton.title = "Done"
-        } else {
-            editButton.title = "Edit"
-        }
-        tableView.reloadData()
-    }
 }
 
 extension PlansViewController: UITableViewDelegate{
+    
+    // Method called when table view cell is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        selectedWorkoutPlan = workoutPlans[indexPath.row] as! Workout
+        selectedWorkoutPlan = workouts[indexPath.row] as Workout
         performSegue(withIdentifier: "toWorkouPlan", sender: self)
 
     }
     
-    
+    // Method called when delete button is pressed
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteWorkout(at: indexPath)
+        }
+    }
 }
 
 extension PlansViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workoutPlans.count
+        return workouts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlanReusableCell", for: indexPath) as! PlanCell
-        cell.planName.text = workoutPlans[indexPath.row].name
-        cell.planDescription.text = workoutPlans[indexPath.row].desc
+        cell.planName.text = workouts[indexPath.row].name
+        cell.planDescription.text = workouts[indexPath.row].desc
         return cell
     }
     

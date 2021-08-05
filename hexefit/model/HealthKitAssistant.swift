@@ -110,9 +110,6 @@ struct HealthKitAssistant{
                                         limit: HKObjectQueryNoLimit,
                                         sortDescriptors:
                                             [sortDescriptor]) { (query, samples, error) in
-            print(error)
-            print(samples!.count)
-            print(samples)
             DispatchQueue.main.async {
                 guard let samples = samples,
                       let mostRecentSample = samples.first as? HKQuantitySample else {

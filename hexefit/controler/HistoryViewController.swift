@@ -232,7 +232,6 @@ extension HistoryViewController: UITableViewDataSource{
         if let safeHexWorkouts = self.hexWorkouts{
             let hexworkout = safeHexWorkouts[indexPath.row]
             let workout = hexworkout.hkWorkout
-            let heartRates = hexworkout.heartRates
             
             //3. Show the workout info
             cell.workoutType.text = workout.workoutActivityType.name

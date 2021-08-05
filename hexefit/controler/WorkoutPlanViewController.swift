@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class WorkoutPlanViewController: UIViewController {
     
-    var workoutPlan: WorkoutPlan?
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+//    var workoutPlan: WorkoutPlan?
     var workout: Workout?
     var isEdit = false
     
@@ -28,29 +31,20 @@ class WorkoutPlanViewController: UIViewController {
                   "XI", "XII", "XIII", "XIV", "XV",
                   "XVI", "XVII", "XVIII", "XIX", "XX"]
     
-    let ws = [
-        WorkoutSet(exercises: [
-                    WorkoutExercise(name: "Agachamento", details: "3x 8-12"),
-                    WorkoutExercise(name: "Agachamento isometrico", details: "3x 20 segundos")]),
-        WorkoutSet(exercises: [
-                    WorkoutExercise(name: "Agachamento com bola", details: "3x 8-12"),
-                    WorkoutExercise(name: "Agachamento isometrico com bola", details: "3x 20 segundos")]),
-        WorkoutSet(exercises: [
-                    WorkoutExercise(name: "Pernada", details: "3x 8-12")])
-    ]
+    var workoutSets: [SetWorkout]?
+    var exercises: [[Exercise]]?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        workoutPlan?.sets = ws
+        loadSetsAndExercises()
         tableView.register(UINib(nibName: "WorkoutPlanTableViewCell", bundle: nil), forCellReuseIdentifier: "ExerciseReusableCell")
-        print(workoutPlan?.name as Any)
         self.tableView.dataSource = self
         self.tableView.delegate = self
         setEditMode(isEdit: false)
         
-        workoutName.text = workoutPlan?.name
-        workoutDescription.text = workoutPlan?.description
+        workoutName.text = workout?.name
+        workoutDescription.text = workout?.desc
         
         let changePlanTitleTap = UITapGestureRecognizer(target: self, action: #selector(changePlanTapFunction))
         workoutName.isUserInteractionEnabled = true
@@ -60,6 +54,46 @@ class WorkoutPlanViewController: UIViewController {
 
     }
     
+    func loadSetsAndExercises(){
+        workoutSets = workout?.hasSets?.allObjects as? [SetWorkout]
+        exercises = []
+        if let safeWorkoutSets = workoutSets{
+            for wSet in safeWorkoutSets{
+                if let setExercises = wSet.hasExercises?.allObjects as? [Exercise]{
+                exercises?.append(setExercises)
+                }
+            }
+        }
+    }
+    
+    func addExerciseToSet(exercise: Exercise, wSet: SetWorkout){
+        exercise.belongsToSet = wSet
+        saveCDContext()
+    }
+    func deleteExerciseFromSet(exercise: Exercise, wSet: SetWorkout){
+        exercise.belongsToSet = nil
+        saveCDContext()
+    }
+    
+    func deleteExercise(at indexPath: IndexPath){
+        if let deleteObject = exercises?[indexPath.section][indexPath.row]{
+            context.delete(deleteObject)
+            saveCDContext()
+            loadSetsAndExercises()
+            tableView.reloadData()
+        }
+    }
+    
+    func saveCDContext() {
+        do{
+            try
+                self.context.save()
+        } catch {
+                print("Error saving to core data")
+        }
+    }
+
+    
     @IBAction func editButtonClicked(_ sender: UIBarButtonItem) {
         isEdit.toggle()
         setEditMode(isEdit: isEdit)
@@ -68,7 +102,10 @@ class WorkoutPlanViewController: UIViewController {
     }
     
     @IBAction func addSetClicked(_ sender: UIButton) {
-        workoutPlan?.sets?.append(WorkoutSet(exercises: []))
+        let newSet = SetWorkout(context: context)
+        newSet.belongsToWorkout = workout
+        saveCDContext()
+        loadSetsAndExercises()
         tableView.reloadData()
     }
     
@@ -119,7 +156,7 @@ class WorkoutPlanViewController: UIViewController {
         alert.addTextField { (textField) in
             textField.placeholder = "Write here your exercise name"
             if let path = indexPath,
-               let exerciseName = self.workoutPlan?.sets?[path.section].exercises[path.row].name {
+               let exerciseName = self.exercises?[path.section][path.row].name {
                 textField.text = exerciseName
             }
             
@@ -129,7 +166,7 @@ class WorkoutPlanViewController: UIViewController {
             let placeholderText = "Exercise details. Ex. 3x 10-12 5kg"
             textField.placeholder = placeholderText
             if let path = indexPath,
-               let exerciseDetails = self.workoutPlan?.sets?[path.section].exercises[path.row].details{
+               let exerciseDetails = self.exercises?[path.section][path.row].details {
                 textField.text =  exerciseDetails
             }
             
@@ -145,12 +182,16 @@ class WorkoutPlanViewController: UIViewController {
                
                 
                 if let path = indexPath{
-                    self.workoutPlan?.sets?[path.section].exercises[path.row].name = exerciseName
-                    self.workoutPlan?.sets?[path.section].exercises[path.row].details = exerciseDetails
+                    self.exercises?[path.section][path.row].name = exerciseName
+                    self.exercises?[path.section][path.row].details = exerciseDetails
                 } else if let button = sectionButton {
-                    let w = WorkoutExercise(name: exerciseName, details: exerciseDetails)
-                    self.workoutPlan?.sets?[button.tag].exercises.append(w)
+                    let newExercise = Exercise(context: self.context)
+                    newExercise.name = exerciseName
+                    newExercise.details = exerciseDetails
+                    newExercise.belongsToSet = self.workoutSets?[button.tag]
                 }
+                self.saveCDContext()
+                self.loadSetsAndExercises()
                 self.tableView.reloadData()
             }
         }))
@@ -166,14 +207,14 @@ class WorkoutPlanViewController: UIViewController {
         
         alert.addTextField { (textField) in
             textField.placeholder = "Write here the name of your plan"
-            textField.text = self.workoutPlan?.name
+            textField.text = self.workout?.name
             
         }
         
         alert.addTextField { (textField) in
             let placeholderText = "Write here a description for your plan"
             textField.placeholder = placeholderText
-            textField.text = self.workoutPlan?.description
+            textField.text = self.workout?.desc
         }
         
         alert.addAction(UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { action in
@@ -182,10 +223,15 @@ class WorkoutPlanViewController: UIViewController {
                let planName = textFieldName.text,
                let textFieldDescription = alert.textFields?[1],
                let planDescription = textFieldDescription.text{
-                self.workoutPlan?.name = planName
-                self.workoutPlan?.description = planDescription
-                self.workoutName.text = self.workoutPlan?.name
-                self.workoutDescription.text = self.workoutPlan?.description
+                
+                // Update DataBase
+                self.workout?.name = planName
+                self.workout?.desc = planDescription
+                self.saveCDContext()
+                
+                // Update UI
+                self.workoutName.text = self.workout?.name
+                self.workoutDescription.text = self.workout?.desc
             }
         }))
         
@@ -196,12 +242,7 @@ class WorkoutPlanViewController: UIViewController {
         
     }
     
-    func deleteExercise(at indexPath: IndexPath){
-        self.workoutPlan?.sets?[indexPath.section].exercises.remove(at: indexPath.row)
-        if self.workoutPlan?.sets?[indexPath.section].exercises.count == 0{
-            self.workoutPlan?.sets?.remove(at: indexPath.section)
-        }
-    }
+
     
     
 }
@@ -212,11 +253,11 @@ class WorkoutPlanViewController: UIViewController {
 extension WorkoutPlanViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.workoutPlan?.sets?.count ?? 0
+        return self.workoutSets?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.workoutPlan?.sets?[section].exercises.count ?? 0
+        return self.exercises?[section].count ?? 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -226,11 +267,10 @@ extension WorkoutPlanViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseReusableCell") as! WorkoutPlanTableViewCell
-        let exercixeName = self.workoutPlan?.sets?[indexPath.section].exercises[indexPath.row].name
         
-        cell.exerciseName.text = exercixeName
+        cell.exerciseName.text = self.exercises?[indexPath.section][indexPath.row].name
         
-        cell.exerciseData.text = self.workoutPlan?.sets?[indexPath.section].exercises[indexPath.row].details
+        cell.exerciseData.text = self.exercises?[indexPath.section][indexPath.row].details
         
         return cell
     }
@@ -288,15 +328,16 @@ extension WorkoutPlanViewController:  UITableViewDelegate {
     
     // Method called when exercise is moved in the table
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        if let movedObject =  self.workoutPlan?.sets?[sourceIndexPath.section].exercises[sourceIndexPath.row]{
+        if let movedObject =  self.exercises?[sourceIndexPath.section][sourceIndexPath.row],
+           let targetSet = self.workoutSets?[sourceIndexPath.section]{
             
-            self.workoutPlan?.sets?[destinationIndexPath.section].exercises.insert(movedObject, at: destinationIndexPath.row)
-            
-            deleteExercise(at: sourceIndexPath)
+            self.addExerciseToSet(exercise: movedObject, wSet: targetSet)
         }
+        self.loadSetsAndExercises()
         tableView.reloadData()
-        
     }
+    
+    
     
     
     

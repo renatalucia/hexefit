@@ -15,8 +15,8 @@
         <relationship name="hasSets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SetWorkout" inverseName="belongsToWorkout" inverseEntity="SetWorkout"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="-185.1529541015625" positionY="-144.8746795654297" width="128" height="74"/>
-        <element name="Workout" positionX="163.9072875976562" positionY="244.1425476074219" width="128" height="88"/>
+        <element name="Exercise" positionX="-185.1529541015625" positionY="-144.8746795654297" width="128" height="73"/>
         <element name="SetWorkout" positionX="-287.0452880859375" positionY="127.5211791992188" width="128" height="73"/>
+        <element name="Workout" positionX="163.9072875976562" positionY="244.1425476074219" width="128" height="88"/>
     </elements>
 </model>
