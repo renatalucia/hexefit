@@ -2,7 +2,8 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Exercise" representedClassName="Exercise" syncable="YES" codeGenerationType="class">
         <attribute name="details" optional="YES" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="order" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="belongsToSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SetWorkout" inverseName="hasExercises" inverseEntity="SetWorkout"/>
     </entity>
     <entity name="SetWorkout" representedClassName="SetWorkout" syncable="YES" codeGenerationType="class">
@@ -15,7 +16,7 @@
         <relationship name="hasSets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SetWorkout" inverseName="belongsToWorkout" inverseEntity="SetWorkout"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="-185.1529541015625" positionY="-144.8746795654297" width="128" height="73"/>
+        <element name="Exercise" positionX="-185.1529541015625" positionY="-144.8746795654297" width="128" height="103"/>
         <element name="SetWorkout" positionX="-287.0452880859375" positionY="127.5211791992188" width="128" height="73"/>
         <element name="Workout" positionX="163.9072875976562" positionY="244.1425476074219" width="128" height="88"/>
     </elements>

@@ -59,17 +59,20 @@ class WorkoutPlanViewController: UIViewController {
         exercises = []
         if let safeWorkoutSets = workoutSets{
             for wSet in safeWorkoutSets{
-                if let setExercises = wSet.hasExercises?.allObjects as? [Exercise]{
+                if var setExercises = wSet.hasExercises?.allObjects as? [Exercise]{
+                    setExercises.sort { $0.order < $1.order }
                 exercises?.append(setExercises)
                 }
             }
         }
+//
+//        @FetchRequest(entity: Book.entity(), sortDescriptors: [
+//            NSSortDescriptor(keyPath: \Book.title, ascending: true),
+//            NSSortDescriptor(keyPath: \Book.author, ascending: true)
+//        ]) var books: FetchedResults<Book>
     }
     
-    func addExerciseToSet(exercise: Exercise, wSet: SetWorkout){
-        exercise.belongsToSet = wSet
-        saveCDContext()
-    }
+
     func deleteExerciseFromSet(exercise: Exercise, wSet: SetWorkout){
         exercise.belongsToSet = nil
         saveCDContext()
@@ -188,7 +191,8 @@ class WorkoutPlanViewController: UIViewController {
                     let newExercise = Exercise(context: self.context)
                     newExercise.name = exerciseName
                     newExercise.details = exerciseDetails
-                    newExercise.belongsToSet = self.workoutSets?[button.tag]
+                    newExercise.order = Int16(self.exercises?[button.tag].count ?? 1)
+                        newExercise.belongsToSet =  self.workoutSets?[button.tag]
                 }
                 self.saveCDContext()
                 self.loadSetsAndExercises()
@@ -329,9 +333,23 @@ extension WorkoutPlanViewController:  UITableViewDelegate {
     // Method called when exercise is moved in the table
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if let movedObject =  self.exercises?[sourceIndexPath.section][sourceIndexPath.row],
-           let targetSet = self.workoutSets?[sourceIndexPath.section]{
+           let targetSet = self.workoutSets?[destinationIndexPath.section]{
             
-            self.addExerciseToSet(exercise: movedObject, wSet: targetSet)
+            // move the object to get new indexes
+            exercises?[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+            exercises?[destinationIndexPath.section].insert(movedObject, at: destinationIndexPath.row)
+            
+            // update attribute order based on new indexes
+            for i in 0...exercises![sourceIndexPath.section].count-1{
+                exercises![sourceIndexPath.section][i].order = Int16(i)
+            }
+            for i in 0...exercises![destinationIndexPath.section].count-1{
+                exercises![destinationIndexPath.section][i].order = Int16(i)
+            }
+            
+            // Update DataBase
+            movedObject.belongsToSet = targetSet
+            saveCDContext()
         }
         self.loadSetsAndExercises()
         tableView.reloadData()
