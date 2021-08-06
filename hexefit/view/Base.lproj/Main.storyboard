@@ -391,30 +391,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sge-w5-Hp5">
-                                <rect key="frame" x="0.0" y="92" width="414" height="652"/>
+                                <rect key="frame" x="0.0" y="86" width="414" height="658"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="ONc-RZ-UuJ">
-                                <rect key="frame" x="19" y="35" width="375" height="41"/>
+                                <rect key="frame" x="19" y="35" width="375" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="My Workouts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ohj-VN-8cX">
-                                        <rect key="frame" x="0.0" y="0.0" width="149" height="41"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="axd-2A-Os2"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="149" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NQ-7I-qe2">
-                                        <rect key="frame" x="226" y="0.0" width="149" height="41"/>
+                                        <rect key="frame" x="226" y="0.0" width="149" height="35"/>
                                         <state key="normal" title="Add Plan"/>
                                         <connections>
                                             <action selector="addPlanButtonClicked:" destination="SDV-3R-UDI" eventType="touchUpInside" id="ZtB-pP-vIc"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="3NQ-7I-qe2" firstAttribute="leading" secondItem="Ohj-VN-8cX" secondAttribute="trailing" id="oDx-4A-YkG"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Yf3-0e-zYM"/>
