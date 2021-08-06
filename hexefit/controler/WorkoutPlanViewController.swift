@@ -39,6 +39,7 @@ class WorkoutPlanViewController: UIViewController {
         super.viewDidLoad()
         loadSetsAndExercises()
         tableView.register(UINib(nibName: "WorkoutPlanTableViewCell", bundle: nil), forCellReuseIdentifier: "ExerciseReusableCell")
+        tableView.rowHeight = 70
         self.tableView.dataSource = self
         self.tableView.delegate = self
         setEditMode(isEdit: false)

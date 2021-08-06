@@ -12,13 +12,12 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyReusableCell" rowHeight="94" id="KGk-i7-Jjw" customClass="HistoryCell" customModule="hexefit" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="383" height="94"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="383" height="94"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOk-6l-AzE">
-                        <rect key="frame" x="0.0" y="0.0" width="383" height="98"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOk-6l-AzE">
+                        <rect key="frame" x="0.0" y="0.0" width="383" height="100"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kYf-o0-aui">
                                 <rect key="frame" x="8" y="19" width="323" height="64"/>
@@ -67,9 +66,17 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.88235294119999996" green="0.94509803920000002" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="yO6-Kh-Mvu"/>
+                        </constraints>
                     </view>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="cOk-6l-AzE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0KP-xz-Vi4"/>
+                    <constraint firstAttribute="bottom" secondItem="cOk-6l-AzE" secondAttribute="bottom" id="K9Z-vG-5Al"/>
+                    <constraint firstAttribute="trailing" secondItem="cOk-6l-AzE" secondAttribute="trailing" id="RJd-f7-ahS"/>
+                    <constraint firstItem="cOk-6l-AzE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yYW-8E-uG5"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>

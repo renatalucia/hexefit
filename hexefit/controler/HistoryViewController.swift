@@ -19,8 +19,10 @@ class HistoryViewController: UIViewController {
     
     var hkAssistant = HealthKitAssistant()
     
+    @IBOutlet weak var trainingsButton: UIBarButtonItem!
     
     
+    @IBOutlet weak var historyButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - HealthKit Methods
@@ -186,9 +188,12 @@ class HistoryViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         self.hexWorkouts = []
+        trainingsButton.width = 150
+        historyButton.width = 150
+        
         
         tableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "historyReusableCell")
-        tableView.rowHeight = 120;
+        tableView.rowHeight = 100;
         tableView.separatorStyle = .none
         
         authorizeHealthKit()

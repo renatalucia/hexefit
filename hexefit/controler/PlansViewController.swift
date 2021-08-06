@@ -29,11 +29,14 @@ class PlansViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addPlanButton.contentHorizontalAlignment = .right
+
         tableView.dataSource = self
         tableView.delegate = self
 
         
         tableView.register(UINib(nibName: "PlanCell", bundle: nil), forCellReuseIdentifier: "PlanReusableCell")
+        tableView.rowHeight = 70
         
         loadWorkouts()
 
