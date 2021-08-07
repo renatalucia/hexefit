@@ -8,6 +8,54 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="ZUN-RG-ClY">
+            <objects>
+                <viewController id="puh-zs-Oif" customClass="HomeViewController" customModule="hexefit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rp8-8H-VyQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aK4-Vt-Hei" userLabel="PieChartView" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="57" y="20" width="300" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="ZZj-xX-XgW"/>
+                                    <constraint firstAttribute="width" constant="300" id="a0o-fF-HDy"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zye-z8-umF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aK4-Vt-Hei" firstAttribute="centerX" secondItem="Rp8-8H-VyQ" secondAttribute="centerX" id="T2Q-76-CGh"/>
+                            <constraint firstItem="aK4-Vt-Hei" firstAttribute="top" secondItem="zye-z8-umF" secondAttribute="top" constant="20" id="lEH-Yc-7dN"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="HT9-oY-NIR"/>
+                        <barButtonItem title="Item" image="book" catalog="system" id="kND-ys-cmh">
+                            <connections>
+                                <segue destination="SDV-3R-UDI" kind="show" id="Qsh-hq-UEA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Item" image="gobackward" catalog="system" id="ri5-Jc-NiL">
+                            <connections>
+                                <segue destination="11L-mK-SDa" kind="show" id="eur-ET-HBd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="4YE-xy-tds"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="zuw-VM-bld"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="pieChart" destination="aK4-Vt-Hei" id="jfi-9a-97u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V3y-pV-sdV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2042" y="710"/>
+        </scene>
         <!--History View Controller-->
         <scene sceneID="tVC-6l-Rpb">
             <objects>
@@ -48,12 +96,14 @@
                         </constraints>
                     </view>
                     <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="rar-PD-Im5"/>
                         <barButtonItem title="Item" image="book" catalog="system" id="cuX-HQ-kTB">
                             <connections>
                                 <segue destination="SDV-3R-UDI" kind="show" id="AJH-s0-hnH"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="Item" image="gobackward" catalog="system" id="ljd-q7-le6"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="PQQ-D8-vNb"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="JdQ-v8-D8I"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -77,10 +127,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
-                                <rect key="frame" x="30" y="50" width="354" height="206"/>
+                                <rect key="frame" x="30" y="50" width="304.5" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="206"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="144.5" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HoP-Q5-KsU">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -222,7 +272,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                        <rect key="frame" x="160" y="0.0" width="194" height="206"/>
+                                        <rect key="frame" x="144.5" y="0.0" width="160" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -447,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0xd-oI-Cvt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3476.811594202899" y="1541.5178571428571"/>
+            <point key="canvasLocation" x="2265" y="1734"/>
         </scene>
         <!--Workout Plan View Controller-->
         <scene sceneID="JbL-eU-wzI">
@@ -562,14 +612,17 @@
                         <color key="barTintColor" systemColor="systemTealColor"/>
                     </toolbar>
                     <connections>
-                        <segue destination="11L-mK-SDa" kind="relationship" relationship="rootViewController" id="imH-Ry-Zaa"/>
+                        <segue destination="puh-zs-Oif" kind="relationship" relationship="rootViewController" id="Snh-RR-0NJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Piy-6f-v9x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1805.7971014492755" y="1064.7321428571429"/>
+            <point key="canvasLocation" x="1286" y="1045"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Qsh-hq-UEA"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="book" catalog="system" width="128" height="102"/>
         <image name="gobackward" catalog="system" width="121" height="128"/>

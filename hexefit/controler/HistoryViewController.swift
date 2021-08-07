@@ -86,7 +86,7 @@ class HistoryViewController: UIViewController {
         
         if  hkWorkouts == nil {
             hkGroup.enter()
-            hkAssistant.loadWorkouts (limit: 60, completion: { (workouts, error) in
+            hkAssistant.loadWorkouts (limit: 30, completion: { (workouts, error) in
                 print("N. of workouts: \(workouts!.count)")
                 if error == nil{
                     self.hkWorkouts = workouts!
@@ -188,9 +188,6 @@ class HistoryViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         self.hexWorkouts = []
-        trainingsButton.width = 150
-        historyButton.width = 150
-        
         
         tableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "historyReusableCell")
         tableView.rowHeight = 100;
