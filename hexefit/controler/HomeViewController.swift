@@ -9,12 +9,14 @@ import UIKit
 import Charts
 
 class HomeViewController: UIViewController {
+    
 
     @IBOutlet weak var pieChart: PieChartView!
     
+    var chartPalette = ["#EF476F","#06D6A0", "#FFD166", "#118AB2"]
     
-    let zones = ["Warm up", "Fat Burn", "Cardio", "Peak"]
-    let timeinzones = [100, 100, 80, 76]
+    let zones = ["Traditional Stength Training", "Mixed Cardio", "Streching", "Yoga", "Running"]
+    let timeinzones = [100, 100, 80, 76, 60]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,22 +45,23 @@ class HomeViewController: UIViewController {
         
     }
     
+    private func updateChartPallete(){
+        for i in 0..<chartPalette.count-1{
+            chartPalette[i] = chartPalette[i+1]
+        }
+        chartPalette[chartPalette.count-1] = chartPalette[0]
+    }
+    
     private func colorsOfCharts(numbersOfColor: Int) -> [UIColor] {
-        print(numbersOfColor)
-
-//        var  colors: [UIColor] = []
-//        for _ in 0..<numbersOfColor {
-//        let red = Double(arc4random_uniform(256))
-//        let green = Double(arc4random_uniform(256))
-//        let blue = Double(arc4random_uniform(256))
-//        let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-//        colors.append(color)
-//      }
-        let colors: [UIColor] = [
-                    UIColor(red: 239/255, green: 71/255, blue: 111/255, alpha: 1),
-                    UIColor(red: 255/255, green: 209/255, blue: 102/255, alpha: 1),
-            UIColor(red: 6/255, green: 214/255, blue: 160/255, alpha: 1),
-                    UIColor(red: 17/255, green: 138/255, blue: 178/255, alpha: 1)]
+        var colors: [UIColor] = []
+        
+        for i in 0..<numbersOfColor {
+            let colorIdx = i % chartPalette.count
+            colors.append(UIColor(hex: chartPalette[colorIdx]) ?? UIColor.green)
+            if i == chartPalette.count - 1{
+                updateChartPallete()
+            }
+        }
       return colors
     }
 
@@ -72,4 +75,28 @@ class HomeViewController: UIViewController {
     }
     */
 
+}
+
+extension UIColor {
+    public convenience init?(hex: String) {
+        let r, g, b: CGFloat
+        if hex.hasPrefix("#") {
+            let start = hex.index(hex.startIndex, offsetBy: 1)
+            let hexColor = String(hex[start...])
+            if hexColor.count == 6{
+                let scanner = Scanner(string: hexColor)
+                var hexNumber: UInt64 = 0
+                if scanner.scanHexInt64(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xFF0000) >> 16) / 255
+                    g = CGFloat((hexNumber & 0x00FF00) >> 8) / 255
+                    b = CGFloat(hexNumber & 0x0000FF) / 255
+
+                    self.init(red: r, green: g, blue: b, alpha: 1.0)
+                    return
+                }
+            }
+        }
+
+        return nil
+    }
 }
