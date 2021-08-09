@@ -14,12 +14,23 @@ import HealthKit
 
 class HomeViewController: UIViewController {
     
-
     @IBOutlet weak var pieChart: PieChartView!
     
-    var hkAssistant = HealthKitAssistant()
+
+    @IBOutlet weak var workoutsLabel: UILabel!
+    @IBOutlet weak var trainingTimeLabel: UILabel!
+    @IBOutlet weak var stepsLabel: UILabel!
+    @IBOutlet weak var caloriesLabel: UILabel!
+    @IBOutlet weak var stairsLabel: UILabel!
+    @IBOutlet weak var sleepLabel: UILabel!
+    @IBOutlet weak var restCaloriesLabel: UILabel!
     
+    
+    var hkAssistant = HealthKitAssistant()
     var weekWorkouts: [String: Int] = [:]
+    var workoutsCount = 0
+    
+    var stepsCount:Double = 0
     
 //    var chartPalette = ["#EF476F","#06D6A0", "#FFD166", "#118AB2"]
     var chartPalette = ["#F94144", "#577590", "#F9C74F", "#F3722C", "#43AA8B", "#F8961E", "#90BE6D"]
@@ -35,7 +46,7 @@ class HomeViewController: UIViewController {
         self.title = "HexFit"
         self.navigationController?.title = "HexFit"
         authorizeHealthKit()
-        customizeChart(dataPoints: Array(weekWorkouts.keys), values: Array(weekWorkouts.values).map{ Double($0)})
+//        customizeChart(dataPoints: Array(weekWorkouts.keys), values: Array(weekWorkouts.values).map{ Double($0)})
         // Do any additional setup after loading the view.
     }
     
@@ -87,6 +98,13 @@ class HomeViewController: UIViewController {
         }
       return colors
     }
+    
+    // MARK: - UI Methods
+    func updateUIWeekData() {
+        self.customizeChart(dataPoints: Array(self.weekWorkouts.keys), values: Array(self.weekWorkouts.values).map{ Double($0)})
+        self.workoutsLabel.text = String(workoutsCount)
+        self.trainingTimeLabel.text = String("\(Array(self.weekWorkouts.values).reduce(0, +))min")
+    }
 }
 
 
@@ -136,6 +154,7 @@ extension HomeViewController{
                 print("Number of workouts:")
                 print(workouts!.count)
             }
+            self.getTodaysSteps()
 
         }
     }
@@ -177,10 +196,11 @@ extension HomeViewController{
                 else{
                     self.weekWorkouts[sample.workoutActivityType.name] = Int(round(Double(sample.duration)/60.0))
                 }
+                self.workoutsCount += 1
             }
             
             DispatchQueue.main.async {
-                self.customizeChart(dataPoints: Array(self.weekWorkouts.keys), values: Array(self.weekWorkouts.values).map{ Double($0)})
+                self.updateUIWeekData()
             }
             completion(samples, nil)
             
@@ -189,5 +209,96 @@ extension HomeViewController{
         HKHealthStore().execute(query)
 
     }
+    
+    func getTodaysSteps() {
+        let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+        let activeEnergyQuantityType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!
+        let basalEnergyQuantityType = HKQuantityType.quantityType(forIdentifier: .basalEnergyBurned)!
+        let flightsClimbedQuantityType = HKQuantityType.quantityType(forIdentifier: .flightsClimbed)!
+        
+        let now = Date()
+        let startOfDay = Calendar.current.startOfDay(for: now)
+        let predicate = HKQuery.predicateForSamples(
+            withStart: startOfDay,
+            end: now,
+            options: .strictStartDate
+        )
+        
+        let query = HKStatisticsQuery(
+            quantityType: stepsQuantityType,
+            quantitySamplePredicate: predicate,
+            options: .cumulativeSum
+        ) { _, result, error in
+            guard let result = result, let sum = result.sumQuantity() else {
+                fatalError("Error loading todays steps")
+            }
+            self.stepsCount = sum.doubleValue(for: HKUnit.count())
+            DispatchQueue.main.async {
+                self.stepsLabel.text = String(self.stepsCount)
+            }
+        }
+        
+        HKHealthStore().execute(query)
+        
+        let queryFC = HKStatisticsQuery(
+            quantityType: flightsClimbedQuantityType,
+            quantitySamplePredicate: predicate,
+            options: .cumulativeSum
+        ) { _, result, error in
+            guard let result = result, let sum = result.sumQuantity() else {
+                fatalError("Error loading stairs climbed")
+            }
+            DispatchQueue.main.async {
+                self.stairsLabel.text = String(sum.doubleValue(for: HKUnit.count()))
+            }
+        }
+        
+        HKHealthStore().execute(queryFC)
+        
+        let queryAE = HKStatisticsQuery(
+            quantityType: activeEnergyQuantityType,
+            quantitySamplePredicate: predicate,
+            options: .cumulativeSum
+        ) { _, result, error in
+            guard let result = result, let sum = result.sumQuantity() else {
+                fatalError("Error loading active calories")
+            }
+            DispatchQueue.main.async {
+                self.caloriesLabel.text = String(sum.doubleValue(for: HKUnit.kilocalorie()))
+            }
+        }
+        
+        HKHealthStore().execute(queryAE)
+        
+        let queryBE = HKStatisticsQuery(
+            quantityType: basalEnergyQuantityType,
+            quantitySamplePredicate: predicate,
+            options: .cumulativeSum
+        ) { _, result, error in
+            guard let result = result, let sum = result.sumQuantity() else {
+                fatalError("Error loading basal calories")
+            }
+            DispatchQueue.main.async {
+                self.restCaloriesLabel.text = String(sum.doubleValue(for: HKUnit.kilocalorie()))
+            }
+        }
+        
+        HKHealthStore().execute(queryBE)
+        
+
+    }
+    
+
+    
+    func loadDayHKData(){
+        //   Define the Step Quantity Type
+//        let stepsCount = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
+//        let activeKcal = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)
+//        let restKcal = HKQuantityType.quantityType(forIdentifier: .basalEnergyBurned)
+//        let stairs = HKQuantityType.quantityType(forIdentifier: .flightsClimbed)
+
+        //   Get the start of the day
+    }
+
 
 }

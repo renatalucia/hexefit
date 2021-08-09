@@ -43,7 +43,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="M4r-hU-3Rw">
-                                                <rect key="frame" x="102.5" y="340.5" width="133" height="30"/>
+                                                <rect key="frame" x="101" y="340.5" width="136.5" height="30"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paperclip" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gsu-tL-Wr2">
                                                         <rect key="frame" x="0.0" y="-0.5" width="30" height="31"/>
@@ -52,14 +52,14 @@
                                                             <constraint firstAttribute="width" constant="30" id="zX0-BH-wh5"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainings: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUV-eN-YZA">
-                                                        <rect key="frame" x="35" y="0.0" width="78" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workouts: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUV-eN-YZA">
+                                                        <rect key="frame" x="35" y="0.0" width="81.5" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DM4-8F-vwN">
-                                                        <rect key="frame" x="118" y="0.0" width="15" height="30"/>
+                                                        <rect key="frame" x="121.5" y="0.0" width="15" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -316,7 +316,14 @@
                     <navigationItem key="navigationItem" id="zuw-VM-bld"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="caloriesLabel" destination="pVA-Ag-oEJ" id="oFf-xm-c0b"/>
                         <outlet property="pieChart" destination="aK4-Vt-Hei" id="jfi-9a-97u"/>
+                        <outlet property="restCaloriesLabel" destination="EWi-ec-Uq6" id="JhT-9s-y6Z"/>
+                        <outlet property="sleepLabel" destination="yQZ-L9-aze" id="7If-8D-9WX"/>
+                        <outlet property="stairsLabel" destination="VRG-Md-Pmv" id="rix-3t-uqA"/>
+                        <outlet property="stepsLabel" destination="6Io-bG-la6" id="SNg-90-u7e"/>
+                        <outlet property="trainingTimeLabel" destination="EA3-DT-Fq1" id="LMj-hQ-dyw"/>
+                        <outlet property="workoutsLabel" destination="DM4-8F-vwN" id="lhb-VY-dgP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V3y-pV-sdV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -397,7 +404,7 @@
                                 <rect key="frame" x="30" y="50" width="304.5" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
-                                        <rect key="frame" x="0.0" y="0.0" width="144.5" height="206"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HoP-Q5-KsU">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -539,7 +546,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                        <rect key="frame" x="144.5" y="0.0" width="160" height="206"/>
+                                        <rect key="frame" x="160" y="0.0" width="144.5" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
