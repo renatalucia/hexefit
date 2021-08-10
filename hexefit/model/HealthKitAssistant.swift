@@ -37,7 +37,9 @@ struct HealthKitAssistant{
                 let basalEnergyBurned = HKObjectType.quantityType(forIdentifier: .basalEnergyBurned),
                 let activeEnergyBurned = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
                 let flightsClimbed = HKObjectType.quantityType(forIdentifier: .flightsClimbed),
-                let stepsCount = HKObjectType.quantityType(forIdentifier: .stepCount)
+                let stepsCount = HKObjectType.quantityType(forIdentifier: .stepCount),
+                let distanceType =  HKSampleType.quantityType(forIdentifier: .distanceWalkingRunning),
+                let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis)
         else {
             fatalError("Error Fatal")
         }
@@ -58,6 +60,8 @@ struct HealthKitAssistant{
                                                        activeEnergyBurned,
                                                        stepsCount,
                                                        flightsClimbed,
+                                                       distanceType,
+                                                       sleepType,
                                                        HKObjectType.workoutType(),
                                                        HKObjectType.quantityType(forIdentifier: .heartRate)!]
         

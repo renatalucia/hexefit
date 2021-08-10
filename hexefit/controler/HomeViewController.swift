@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var stairsLabel: UILabel!
     @IBOutlet weak var sleepLabel: UILabel!
     @IBOutlet weak var restCaloriesLabel: UILabel!
-    
+    @IBOutlet weak var distanceLabel: UILabel!
     
     var hkAssistant = HealthKitAssistant()
     var weekWorkouts: [String: Int] = [:]
@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         let format = NumberFormatter()
         format.numberStyle = .none
-        let formatter = DefaultValueFormatter(formatter: format)
+        let formatter = ChartValueFormatter(numberFormatter: format)
         pieChartData.setValueFormatter(formatter)
         pieChart.drawEntryLabelsEnabled = false
         pieChart.legend.horizontalAlignment = .center
@@ -133,6 +133,23 @@ extension UIColor {
     }
 }
 
+// MARK: - Formatter for PieChart
+class ChartValueFormatter: NSObject, IValueFormatter {
+    fileprivate var numberFormatter: NumberFormatter?
+
+    convenience init(numberFormatter: NumberFormatter) {
+        self.init()
+        self.numberFormatter = numberFormatter
+    }
+
+    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+        guard let numberFormatter = numberFormatter
+            else {
+                return ""
+        }
+        return "\(numberFormatter.string(for: value)!) \n min"
+    }
+}
 
 // MARK: - HealthKit Methods
 extension HomeViewController{
@@ -154,7 +171,7 @@ extension HomeViewController{
                 print("Number of workouts:")
                 print(workouts!.count)
             }
-            self.getTodaysSteps()
+            self.getTodaysData()
 
         }
     }
@@ -210,11 +227,13 @@ extension HomeViewController{
 
     }
     
-    func getTodaysSteps() {
+    func getTodaysData() {
         let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
         let activeEnergyQuantityType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!
         let basalEnergyQuantityType = HKQuantityType.quantityType(forIdentifier: .basalEnergyBurned)!
         let flightsClimbedQuantityType = HKQuantityType.quantityType(forIdentifier: .flightsClimbed)!
+        let distanceType =  HKSampleType.quantityType(forIdentifier: .distanceWalkingRunning)!
+        let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
         
         let now = Date()
         let startOfDay = Calendar.current.startOfDay(for: now)
@@ -284,6 +303,58 @@ extension HomeViewController{
         }
         
         HKHealthStore().execute(queryBE)
+        
+        let queryD = HKStatisticsQuery(
+            quantityType: distanceType,
+            quantitySamplePredicate: predicate,
+            options: .cumulativeSum
+        ) { _, result, error in
+            guard let result = result, let sum = result.sumQuantity() else {
+                fatalError("Error loading basal calories")
+            }
+            print("distance:")
+            let distance = sum.doubleValue(for: HKUnit.meter())/1000.0
+            let distanceString = String(format: "%.1f", distance)
+            DispatchQueue.main.async {
+                self.distanceLabel.text = "\(distanceString)km"
+            }
+        }
+        
+        HKHealthStore().execute(queryD)
+        
+        // Get all samples from the last 24 hours
+        let endDate = Date()
+        let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
+        let predicateSleepQuery = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
+                                                ascending: true)
+        let querySL = HKSampleQuery(
+            sampleType: sleepType,
+            predicate: predicateSleepQuery,
+            limit: 0,
+            sortDescriptors: [sortDescriptor]) { (query, result, error) in
+                guard let result = result else {
+                    fatalError("Error loading sleep data")
+                }
+                var minutesSleepAggr = 0.0
+                for item in result {
+                    if let sample = item as? HKCategorySample {
+                        if sample.value == HKCategoryValueSleepAnalysis.asleep.rawValue && sample.startDate >= startDate {
+                                let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
+                                let minutesInAnHour = 60.0
+                                let minutesBetweenDates = sleepTime / minutesInAnHour
+                                minutesSleepAggr += minutesBetweenDates
+                        }
+                    }
+                }
+            
+                print(minutesSleepAggr)
+                DispatchQueue.main.async {
+                    self.sleepLabel.text = "\(String(Int(minutesSleepAggr/60)))h\(String( Int(round(minutesSleepAggr.truncatingRemainder(dividingBy: 60.0)))))m"
+                }
+            }
+        
+        HKHealthStore().execute(querySL)
         
 
     }
