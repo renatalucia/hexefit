@@ -25,15 +25,19 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var sleepLabel: UILabel!
     @IBOutlet weak var restCaloriesLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var duesPaidLabel: UILabel!
+    @IBOutlet weak var activeTimeLabel: UILabel!
     
     var hkAssistant = HealthKitAssistant()
     var weekWorkouts: [String: Int] = [:]
     var workoutsCount = 0
+    var workoutsToday = 0
+    var activeTimeToday:Int = 0
     
     var stepsCount:Double = 0
     
-//    var chartPalette = ["#EF476F","#06D6A0", "#FFD166", "#118AB2"]
-    var chartPalette = ["#F94144", "#577590", "#F9C74F", "#F3722C", "#43AA8B", "#F8961E", "#90BE6D"]
+    var chartPalette = ["#EF476F","#06D6A0", "#FFD166", "#118AB2"]
+//    var chartPalette = ["#F94144", "#577590", "#F9C74F", "#F3722C", "#43AA8B", "#F8961E", "#90BE6D"]
     
     let zones = ["Traditional Stength Training", "Mixed Cardio", "Streching", "Yoga", "Running"]
     
@@ -45,6 +49,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.title = "HexFit"
         self.navigationController?.title = "HexFit"
+        self.duesPaidLabel.clipsToBounds = true
+        duesPaidLabel.lineBreakMode = .byWordWrapping
+        duesPaidLabel.numberOfLines = 0;
         authorizeHealthKit()
 //        customizeChart(dataPoints: Array(weekWorkouts.keys), values: Array(weekWorkouts.values).map{ Double($0)})
         // Do any additional setup after loading the view.
@@ -70,8 +77,14 @@ class HomeViewController: UIViewController {
         pieChartData.setValueFormatter(formatter)
         pieChart.drawEntryLabelsEnabled = false
         pieChart.legend.horizontalAlignment = .center
+        
         // 4. Assign it to the chart’s data
         pieChart.data = pieChartData
+        
+        let chartAttribute = [ NSAttributedString.Key.font: UIFont(name: "ArialHebrew", size: 20)! ]
+        let chartAttrString = NSAttributedString(
+            string: "\(String(workoutsCount))", attributes: chartAttribute)
+        pieChart.centerAttributedText = chartAttrString
         
     }
     
@@ -103,7 +116,15 @@ class HomeViewController: UIViewController {
     func updateUIWeekData() {
         self.customizeChart(dataPoints: Array(self.weekWorkouts.keys), values: Array(self.weekWorkouts.values).map{ Double($0)})
         self.workoutsLabel.text = String(workoutsCount)
+        self.activeTimeLabel.text = String("\(self.activeTimeToday)min")
         self.trainingTimeLabel.text = String("\(Array(self.weekWorkouts.values).reduce(0, +))min")
+        if workoutsToday > 0{
+            self.duesPaidLabel.text = "Dues Paid! \n Congrats! You did \(workoutsToday) workouts today."
+            self.duesPaidLabel.backgroundColor = UIColor(hex: "#06d6a0", alpha: 1.0)
+        } else {
+            self.duesPaidLabel.text = "Let's move! \n The only bad workout is the one that \n didn't happen."
+            self.duesPaidLabel.backgroundColor = UIColor(hex: "#ef476f", alpha: 1.0)
+        }
     }
 }
 
@@ -214,6 +235,12 @@ extension HomeViewController{
                     self.weekWorkouts[sample.workoutActivityType.name] = Int(round(Double(sample.duration)/60.0))
                 }
                 self.workoutsCount += 1
+                
+                if Calendar.current.isDate(sample.endDate, inSameDayAs: Date()){
+                    self.workoutsToday += 1
+                    self.activeTimeToday += Int(round(Double(sample.duration)/60.0))
+                }
+
             }
             
             DispatchQueue.main.async {

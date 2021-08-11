@@ -9,7 +9,7 @@ import UIKit
 import HealthKit
 
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: ToolBarViewController {
     
     var userId: String?
     var hexWorkouts: [HexWorkout]?
@@ -185,6 +185,8 @@ class HistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ooooo")
+        self.toolbarItems = super.toolbarItems
         tableView.dataSource = self
         tableView.delegate = self
         self.hexWorkouts = []
