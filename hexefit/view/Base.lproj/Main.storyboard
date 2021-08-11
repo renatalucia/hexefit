@@ -365,43 +365,6 @@
             </objects>
             <point key="canvasLocation" x="2040.5797101449277" y="709.82142857142856"/>
         </scene>
-        <!--Tool Bar View Controller-->
-        <scene sceneID="2cD-pg-XB3">
-            <objects>
-                <viewController id="Nab-6M-7lf" customClass="ToolBarViewController" customModule="hexefit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eB4-YX-9Yt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="3DS-e5-8mw"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="g7M-k3-7te"/>
-                        <barButtonItem title="Item" image="house" catalog="system" id="VsY-Uz-y00">
-                            <connections>
-                                <segue destination="puh-zs-Oif" kind="show" id="RNM-cp-XJQ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="oAc-7h-dQE"/>
-                        <barButtonItem title="Item" image="book" catalog="system" id="p1F-b2-EzM">
-                            <connections>
-                                <segue destination="SDV-3R-UDI" kind="show" id="ABL-qy-M1i"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="S5g-Jp-VuN"/>
-                        <barButtonItem title="Item" image="gobackward" catalog="system" id="i2r-qK-LWp">
-                            <connections>
-                                <segue destination="11L-mK-SDa" kind="show" id="jfs-fr-WdM"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="XjB-2k-2Lx"/>
-                    </toolbarItems>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5pN-f6-zGK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2777" y="398"/>
-        </scene>
         <!--History View Controller-->
         <scene sceneID="tVC-6l-Rpb">
             <objects>
@@ -441,7 +404,21 @@
                             <constraint firstItem="Pyp-86-yNb" firstAttribute="top" secondItem="OTv-vv-I2y" secondAttribute="top" constant="110" id="wC3-Nd-acO"/>
                         </constraints>
                     </view>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zQf-DP-hXT"/>
+                        <barButtonItem title="Item" image="house" catalog="system" id="NlE-r5-vga">
+                            <connections>
+                                <segue destination="puh-zs-Oif" kind="show" id="Y87-qC-xXy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="coy-27-4mJ"/>
+                        <barButtonItem title="Item" image="book" catalog="system" id="2zz-uG-6Rv">
+                            <connections>
+                                <segue destination="SDV-3R-UDI" kind="show" id="Tze-lT-HXu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="oHi-UP-Utv"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="JdQ-v8-D8I"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -462,7 +439,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
-                                <rect key="frame" x="30" y="94" width="354" height="206"/>
+                                <rect key="frame" x="30" y="94" width="304.5" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="206"/>
@@ -607,7 +584,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                        <rect key="frame" x="160" y="0.0" width="194" height="206"/>
+                                        <rect key="frame" x="160" y="0.0" width="144.5" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -761,7 +738,29 @@
                             <constraint firstItem="Cj8-ME-4ip" firstAttribute="centerX" secondItem="Hww-gJ-eFP" secondAttribute="centerX" id="s7l-HP-b0C"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="eaf-eL-QPg"/>
+                        <barButtonItem title="Item" image="house" catalog="system" id="LOi-7N-sd3">
+                            <connections>
+                                <segue destination="puh-zs-Oif" kind="show" id="noK-sF-jgd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="UJt-Id-EIu"/>
+                        <barButtonItem title="Item" image="book" catalog="system" id="aDF-z6-OZD">
+                            <connections>
+                                <segue destination="SDV-3R-UDI" kind="show" id="x96-Cr-T26"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="GsT-UL-JQz"/>
+                        <barButtonItem title="Item" image="gobackward" catalog="system" id="RRi-ER-y8K">
+                            <connections>
+                                <segue destination="11L-mK-SDa" kind="show" id="F8l-OX-tbB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="2jl-Ec-t6Q"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="cYi-al-0dl"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwv-m5-S95" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -811,7 +810,21 @@
                             <constraint firstItem="sge-w5-Hp5" firstAttribute="top" secondItem="ONc-RZ-UuJ" secondAttribute="bottom" constant="16" id="qCl-VT-bHO"/>
                         </constraints>
                     </view>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zDY-pS-pu9"/>
+                        <barButtonItem title="Item" image="house" catalog="system" id="1Gu-ef-6Qi">
+                            <connections>
+                                <segue destination="puh-zs-Oif" kind="show" id="2CV-nw-DJf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="xMQ-wS-1ql"/>
+                        <barButtonItem title="Item" image="gobackward" catalog="system" id="C55-RC-JBc">
+                            <connections>
+                                <segue destination="11L-mK-SDa" kind="show" id="sTh-fD-Prq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zph-1s-un1"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="bHi-zz-r8W">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="36P-Vs-opH">
                             <connections>
@@ -899,7 +912,27 @@
                             <constraint firstItem="6Qy-of-NQw" firstAttribute="leading" secondItem="HWq-4r-fHT" secondAttribute="leading" id="pFx-0i-B7H"/>
                         </constraints>
                     </view>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="9MY-iq-IkQ"/>
+                        <barButtonItem title="Item" image="house" catalog="system" id="KzS-BD-9zf">
+                            <connections>
+                                <segue destination="puh-zs-Oif" kind="show" id="vHH-KH-lJA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7N6-1Y-KMk"/>
+                        <barButtonItem title="Item" image="book" catalog="system" id="7ih-7Z-X3u">
+                            <connections>
+                                <segue destination="SDV-3R-UDI" kind="show" id="3KQ-sz-l8k"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="kBd-h2-biR"/>
+                        <barButtonItem title="Item" image="gobackward" catalog="system" id="MON-9a-bx6">
+                            <connections>
+                                <segue destination="11L-mK-SDa" kind="show" id="her-Q8-irB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="SRA-kv-6Sv"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="2Qz-c3-yus">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="lVh-QV-hh9">
                             <color key="tintColor" systemColor="systemBlueColor"/>
@@ -953,9 +986,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ABL-qy-M1i"/>
-        <segue reference="jfs-fr-WdM"/>
-        <segue reference="RNM-cp-XJQ"/>
+        <segue reference="x96-Cr-T26"/>
+        <segue reference="F8l-OX-tbB"/>
+        <segue reference="noK-sF-jgd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="activekcal" width="60" height="60"/>
