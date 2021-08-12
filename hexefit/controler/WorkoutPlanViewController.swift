@@ -317,28 +317,49 @@ extension WorkoutPlanViewController:  UITableViewDelegate {
 //                   viewForHeaderInSection section: Int) -> UIView?{
         
 
-        var button: UIButton? = nil
+        var buttonAddExercise: UIButton? = nil
+        var buttonRemoveSet: UIButton? = nil
         if view.subviews.count > 0{
             for subview in view.subviews{
                 if let btn = subview as? UIButton{
                     btn.isHidden = !isEdit
-                    button = btn
+                    if btn.tag == 1{
+                        buttonAddExercise = btn
+                    }
+                    if btn.tag == 2{
+                        buttonRemoveSet = btn
+                    }
                 }
             }
         }
         if isEdit {
-            if button == nil{
-                let button = UIButton(type: .system)
-                button.setTitle("add exercise", for: .normal)
-                button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-                button.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is no left
-                button.setTitleColor(.systemBlue, for: .normal)
-                button.tag = section
-                button.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                view.addSubview(button)
+            if buttonAddExercise == nil{
+                let buttonAddExercise = UIButton(type: .system)
+                buttonAddExercise.tag = 1
+                buttonAddExercise.setTitle("add exercise", for: .normal)
+                buttonAddExercise.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                buttonAddExercise.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is no left
+                buttonAddExercise.setTitleColor(.systemBlue, for: .normal)
+                buttonAddExercise.tag = section
+                buttonAddExercise.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
+                buttonAddExercise.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(buttonAddExercise)
                 let margins = view.layoutMarginsGuide
-                button.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
+                buttonAddExercise.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 10).isActive = true
+            }
+            if buttonRemoveSet == nil{
+                let buttonRemoveSet = UIButton(type: .system)
+                buttonRemoveSet.tag = 1
+                buttonRemoveSet.setTitle("-", for: .normal)
+                buttonRemoveSet.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                buttonRemoveSet.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center // There is no left
+                buttonRemoveSet.setTitleColor(.systemBlue, for: .normal)
+                buttonRemoveSet.tag = section
+                buttonRemoveSet.addTarget(self, action: #selector(addExerciseToSection), for: .touchUpInside)
+                buttonRemoveSet.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(buttonRemoveSet)
+                let margins = view.layoutMarginsGuide
+                buttonRemoveSet.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 0).isActive = true
             }
         }
     }

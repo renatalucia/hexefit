@@ -439,10 +439,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
-                                <rect key="frame" x="30" y="94" width="304.5" height="206"/>
+                                <rect key="frame" x="30" y="94" width="354" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="206"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="194" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HoP-Q5-KsU">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -584,7 +584,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                        <rect key="frame" x="160" y="0.0" width="144.5" height="206"/>
+                                        <rect key="frame" x="194" y="0.0" width="160" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -887,7 +887,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYk-lu-Fir">
                                         <rect key="frame" x="288" y="0.0" width="126" height="100"/>
                                         <state key="normal" title="Add Set">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
                                         <connections>
                                             <action selector="addSetClicked:" destination="Oph-Y1-OIJ" eventType="touchUpInside" id="qiH-61-r0b"/>
@@ -986,9 +986,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="x96-Cr-T26"/>
-        <segue reference="F8l-OX-tbB"/>
-        <segue reference="noK-sF-jgd"/>
+        <segue reference="3KQ-sz-l8k"/>
+        <segue reference="her-Q8-irB"/>
+        <segue reference="vHH-KH-lJA"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="activekcal" width="60" height="60"/>
