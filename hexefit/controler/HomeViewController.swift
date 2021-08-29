@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var duesPaidLabel: UILabel!
     @IBOutlet weak var activeTimeLabel: UILabel!
+    @IBOutlet weak var todayWorkoutsLabel: UILabel!
     
     var hkAssistant = HealthKitAssistant()
     var weekWorkouts: [String: Int] = [:]
@@ -49,9 +50,9 @@ class HomeViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         self.title = "HexFit"
         self.navigationController?.title = "HexFit"
-        self.duesPaidLabel.clipsToBounds = true
-        duesPaidLabel.lineBreakMode = .byWordWrapping
-        duesPaidLabel.numberOfLines = 0;
+//        self.duesPaidLabel.clipsToBounds = true
+//        duesPaidLabel.lineBreakMode = .byWordWrapping
+//        duesPaidLabel.numberOfLines = 0;
         authorizeHealthKit()
         self.pieChart.delegate = self
 
@@ -127,13 +128,15 @@ class HomeViewController: UIViewController, ChartViewDelegate {
         self.workoutsLabel.text = String(workoutsCount)
         self.activeTimeLabel.text = String("\(self.activeTimeToday)min")
         self.trainingTimeLabel.text = String("\(Array(self.weekWorkouts.values).reduce(0, +))min")
-        if workoutsToday > 0{
-            self.duesPaidLabel.text = "Dues Paid! \n Congrats! You did \(workoutsToday) workouts today."
-            self.duesPaidLabel.backgroundColor = UIColor(hex: "#06d6a0", alpha: 1.0)
-        } else {
-            self.duesPaidLabel.text = "Let's move! \n The only bad workout is the one that \n didn't happen."
-            self.duesPaidLabel.backgroundColor = UIColor(hex: "#ef476f", alpha: 1.0)
-        }
+        
+        self.todayWorkoutsLabel.text = String(workoutsToday)
+//        if workoutsToday > 0{
+//            self.duesPaidLabel.text = "Dues Paid! \n Congrats! You did \(workoutsToday) workouts today."
+//            self.duesPaidLabel.backgroundColor = UIColor(hex: "#06d6a0", alpha: 1.0)
+//        } else {
+//            self.duesPaidLabel.text = "Let's move! \n The only bad workout is the one that \n didn't happen."
+//            self.duesPaidLabel.backgroundColor = UIColor(hex: "#ef476f", alpha: 1.0)
+//        }
     }
 }
 
