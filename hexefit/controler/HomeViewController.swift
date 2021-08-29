@@ -12,7 +12,7 @@ import HealthKit
 
 
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var pieChart: PieChartView!
     
@@ -53,6 +53,8 @@ class HomeViewController: UIViewController {
         duesPaidLabel.lineBreakMode = .byWordWrapping
         duesPaidLabel.numberOfLines = 0;
         authorizeHealthKit()
+        self.pieChart.delegate = self
+
 //        customizeChart(dataPoints: Array(weekWorkouts.keys), values: Array(weekWorkouts.values).map{ Double($0)})
         // Do any additional setup after loading the view.
     }
@@ -77,6 +79,7 @@ class HomeViewController: UIViewController {
         pieChartData.setValueFormatter(formatter)
         pieChart.drawEntryLabelsEnabled = false
         pieChart.legend.horizontalAlignment = .center
+        pieChartData.highlightEnabled = false
         
         // 4. Assign it to the chart’s data
         pieChart.data = pieChartData
@@ -86,6 +89,12 @@ class HomeViewController: UIViewController {
             string: "\(String(workoutsCount))", attributes: chartAttribute)
         pieChart.centerAttributedText = chartAttrString
         
+        
+    }
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight){
+        print("Triangle")
+        performSegue(withIdentifier: "toRecent", sender: self)
     }
     
     func updateChartPallete(){

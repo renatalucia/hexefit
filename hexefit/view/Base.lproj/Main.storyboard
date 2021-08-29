@@ -359,11 +359,12 @@
                         <outlet property="stepsLabel" destination="6Io-bG-la6" id="SNg-90-u7e"/>
                         <outlet property="trainingTimeLabel" destination="EA3-DT-Fq1" id="LMj-hQ-dyw"/>
                         <outlet property="workoutsLabel" destination="DM4-8F-vwN" id="lhb-VY-dgP"/>
+                        <segue destination="11L-mK-SDa" kind="show" identifier="toRecent" id="pTD-ab-djV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V3y-pV-sdV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2040.5797101449277" y="709.82142857142856"/>
+            <point key="canvasLocation" x="1583" y="977"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="tVC-6l-Rpb">
@@ -439,10 +440,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
-                                <rect key="frame" x="30" y="94" width="354" height="206"/>
+                                <rect key="frame" x="30" y="94" width="304.5" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
-                                        <rect key="frame" x="0.0" y="0.0" width="194" height="206"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="144.5" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HoP-Q5-KsU">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -584,7 +585,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                        <rect key="frame" x="194" y="0.0" width="160" height="206"/>
+                                        <rect key="frame" x="144.5" y="0.0" width="160" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                 <rect key="frame" x="0.0" y="0.0" width="144.5" height="35"/>
@@ -742,7 +743,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="eaf-eL-QPg"/>
                         <barButtonItem title="Item" image="house" catalog="system" id="LOi-7N-sd3">
                             <connections>
-                                <segue destination="puh-zs-Oif" kind="show" id="noK-sF-jgd"/>
+                                <segue destination="puh-zs-Oif" kind="show" identifier="" id="noK-sF-jgd"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="UJt-Id-EIu"/>
@@ -904,8 +905,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="lGq-fH-pAa" firstAttribute="top" secondItem="6Qy-of-NQw" secondAttribute="bottom" id="20l-ew-1zi"/>
+                            <constraint firstAttribute="bottom" secondItem="lGq-fH-pAa" secondAttribute="bottom" constant="24" id="Lcf-AN-wpl"/>
                             <constraint firstItem="lGq-fH-pAa" firstAttribute="leading" secondItem="HWq-4r-fHT" secondAttribute="leading" id="Lph-Ub-TZL"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="lGq-fH-pAa" secondAttribute="bottom" constant="-59" id="Vqc-Zr-YYk"/>
                             <constraint firstItem="lGq-fH-pAa" firstAttribute="centerX" secondItem="44B-fd-W26" secondAttribute="centerX" id="ev4-3F-1Hr"/>
                             <constraint firstItem="6Qy-of-NQw" firstAttribute="top" secondItem="HWq-4r-fHT" secondAttribute="top" id="mZW-Fb-wdS"/>
                             <constraint firstItem="HWq-4r-fHT" firstAttribute="trailing" secondItem="6Qy-of-NQw" secondAttribute="trailing" id="nfJ-8G-WCi"/>
@@ -986,9 +987,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3KQ-sz-l8k"/>
-        <segue reference="her-Q8-irB"/>
-        <segue reference="vHH-KH-lJA"/>
+        <segue reference="Qsh-hq-UEA"/>
+        <segue reference="pTD-ab-djV"/>
+        <segue reference="Y87-qC-xXy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="activekcal" width="60" height="60"/>
