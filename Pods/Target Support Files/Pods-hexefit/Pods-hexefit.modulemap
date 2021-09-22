@@ -1,0 +1,6 @@
+framework module Pods_hexefit {
+  umbrella header "Pods-hexefit-umbrella.h"
+
+  export *
+  module * { export * }
+}
