@@ -11,9 +11,17 @@ import HealthKit
 
 class HistoryViewController: ToolBarViewController {
     
+    var workoutIcons = [
+        50: "dumbbell",
+        73: "cardio",
+        24: "hike",
+        37: "run100"
+    ]
+    
     var userId: String?
     var hexWorkouts: [HexWorkout]?
     var hkWorkouts: [HKWorkout]?
+    var hexWorkout: HexWorkout?
     
     var userProfile = UserProfile()
     
@@ -208,11 +216,31 @@ class HistoryViewController: ToolBarViewController {
 extension HistoryViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+        
+        if let selectedWorkout = hexWorkouts?[indexPath.row]{
+            hexWorkout = selectedWorkout
+        }
+        
         performSegue(withIdentifier: "ToActivitySummary", sender: self)
 
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destVC = segue.destination as? ActivityDetailsViewController {
+            destVC.hexWorkout = self.hexWorkout
+            destVC.userProfile = self.userProfile
+            if let safeWorkout = self.hexWorkout{
+                destVC.workoutIconName =  workoutIcons [Int(safeWorkout.hkWorkout.workoutActivityType.rawValue),
+                                                default: "workout"]
+            } else {
+                destVC.workoutIconName = "workout"
+            }
+        }
+    }
 
 }
+
+
 
 extension HistoryViewController: UITableViewDataSource{
     
@@ -238,16 +266,22 @@ extension HistoryViewController: UITableViewDataSource{
             let workout = hexworkout.hkWorkout
             
             //3. Show the workout info
+            print("workoutActivityType")
+            print(workout.workoutActivityType.rawValue)
             cell.workoutType.text = workout.workoutActivityType.name
-            cell.activityIcon.image = UIImage(named: "run")
+            
+            let iconName = workoutIcons [Int(workout.workoutActivityType.rawValue),
+                                         default: "workout"]
+            
+            
+            cell.activityIcon.image = UIImage(named: iconName)
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd-MM-yyyy"
             cell.startTime.text = formatter.string(from: workout.startDate)
             
             let duration = (Int(workout.duration) / 60 ) % 60
-//            let maxHR = heartRates.max().map { String($0) } ?? "Value not provided"
-//            cell.duration.text = "\(duration)min, \(maxHR)"
+
             if let workoutntensity = hexworkout.intensity{
                 cell.duration.text = "\(duration)min, \(workoutntensity)"
             } else{

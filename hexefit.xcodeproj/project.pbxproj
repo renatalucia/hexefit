@@ -35,6 +35,7 @@
 		94C2AB3C26B06687005D2E4C /* WorkoutPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3B26B06687005D2E4C /* WorkoutPlanViewController.swift */; };
 		94C2AB3F26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2AB3D26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift */; };
 		94C2AB4026B1A26F005D2E4C /* WorkoutPlanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C2AB3E26B1A26F005D2E4C /* WorkoutPlanTableViewCell.xib */; };
+		94DB2FD826F77C1B002C2762 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DB2FD726F77C1B002C2762 /* ActivityDetailsViewController.swift */; };
 		96C4DAD608E1541A127FB6E0 /* Pods_hexefit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB942A6BDF385114DBE1D597 /* Pods_hexefit.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		94C2AB3B26B06687005D2E4C /* WorkoutPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPlanViewController.swift; sourceTree = "<group>"; };
 		94C2AB3D26B1A26F005D2E4C /* WorkoutPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPlanTableViewCell.swift; sourceTree = "<group>"; };
 		94C2AB3E26B1A26F005D2E4C /* WorkoutPlanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutPlanTableViewCell.xib; sourceTree = "<group>"; };
+		94DB2FD726F77C1B002C2762 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		9AE7CA524C2469EEC957A2A9 /* Pods-hexefitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefitTests.release.xcconfig"; path = "Target Support Files/Pods-hexefitTests/Pods-hexefitTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB942A6BDF385114DBE1D597 /* Pods_hexefit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hexefit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51465A0006C611A13ABD582 /* Pods-hexefit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hexefit.release.xcconfig"; path = "Target Support Files/Pods-hexefit/Pods-hexefit.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				9426BEF226A33C060068B840 /* HistoryViewController.swift */,
 				9465C73C26BEDA7F00C1AE8F /* HomeViewController.swift */,
 				94C2AB3026B0587F005D2E4C /* PlansViewController.swift */,
+				94DB2FD726F77C1B002C2762 /* ActivityDetailsViewController.swift */,
 				94C2AB3526B062FD005D2E4C /* PlanCell.swift */,
 				94C2AB3B26B06687005D2E4C /* WorkoutPlanViewController.swift */,
 			);
@@ -486,6 +489,7 @@
 				94C2AB3C26B06687005D2E4C /* WorkoutPlanViewController.swift in Sources */,
 				94C2AB3126B0587F005D2E4C /* PlansViewController.swift in Sources */,
 				94B5F0B126C2D08000D1EC6F /* ToolBarViewController.swift in Sources */,
+				94DB2FD826F77C1B002C2762 /* ActivityDetailsViewController.swift in Sources */,
 				94C2AB3326B05A4C005D2E4C /* WorkoutPlan.swift in Sources */,
 				94C2AB3726B062FD005D2E4C /* PlanCell.swift in Sources */,
 				9426BEBF26A09BA70068B840 /* hexefit.xcdatamodeld in Sources */,

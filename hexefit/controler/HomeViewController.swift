@@ -80,6 +80,7 @@ class HomeViewController: UIViewController, ChartViewDelegate {
         pieChartData.setValueFormatter(formatter)
         pieChart.drawEntryLabelsEnabled = false
         pieChart.legend.horizontalAlignment = .center
+        pieChart.legend.font = UIFont(name: "ChalkboardSE-Regular", size: 15.0)!
         pieChartData.highlightEnabled = false
         
         // 4. Assign it to the chart’s data
@@ -125,11 +126,11 @@ class HomeViewController: UIViewController, ChartViewDelegate {
     // MARK: - UI Methods
     func updateUIWeekData() {
         self.customizeChart(dataPoints: Array(self.weekWorkouts.keys), values: Array(self.weekWorkouts.values).map{ Double($0)})
-        self.workoutsLabel.text = String(workoutsCount)
-        self.activeTimeLabel.text = String("\(self.activeTimeToday)min")
+        // self.workoutsLabel.text = String(workoutsCount)
+        // self.activeTimeLabel.text = String("\(self.activeTimeToday)min")
         self.trainingTimeLabel.text = String("\(Array(self.weekWorkouts.values).reduce(0, +))min")
         
-        self.todayWorkoutsLabel.text = String(workoutsToday)
+        // self.todayWorkoutsLabel.text = String(workoutsToday)
 //        if workoutsToday > 0{
 //            self.duesPaidLabel.text = "Dues Paid! \n Congrats! You did \(workoutsToday) workouts today."
 //            self.duesPaidLabel.backgroundColor = UIColor(hex: "#06d6a0", alpha: 1.0)
@@ -204,7 +205,7 @@ extension HomeViewController{
                 print("Number of workouts:")
                 print(workouts!.count)
             }
-            self.getTodaysData()
+            //self.getTodaysData()
 
         }
     }
@@ -214,13 +215,20 @@ extension HomeViewController{
 
         let calendar = NSCalendar.current
         let endDate = Date()
-         
-        guard let startDate = calendar.date(byAdding: .day, value: -7, to: endDate) else {
+        
+        var comps = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: endDate)
+        comps.weekday = 2 // Monday
+        guard let mondayInWeek = calendar.date(from: comps) else {
             fatalError("*** Unable to create the start date ***")
         }
+        
+         
+//        guard let startDate = calendar.date(byAdding: .day, value: -7, to: endDate) else {
+//            fatalError("*** Unable to create the start date ***")
+//        }
 
         // Create the predicate for the query
-        let workoutsWithinRange = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictEndDate)
+        let workoutsWithinRange = HKQuery.predicateForSamples(withStart: mondayInWeek, end: endDate, options: .strictEndDate)
         
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
                                                 ascending: true)
