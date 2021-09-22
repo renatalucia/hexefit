@@ -204,11 +204,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Mwk-aF-Nj4">
-                                <rect key="frame" x="10" y="94" width="289" height="276"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Mwk-aF-Nj4">
+                                <rect key="frame" x="50" y="94" width="314.5" height="276"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bKm-5Q-rnk">
-                                        <rect key="frame" x="0.0" y="0.0" width="289" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bKm-5Q-rnk">
+                                        <rect key="frame" x="0.0" y="0.0" width="314.5" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="workout" translatesAutoresizingMaskIntoConstraints="NO" id="ijv-J4-EJy">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -218,18 +218,18 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW0-YT-ZJe">
-                                                <rect key="frame" x="70" y="0.0" width="219" height="50"/>
+                                                <rect key="frame" x="70" y="13.5" width="244.5" height="23"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
-                                        <rect key="frame" x="0.0" y="70" width="289" height="206"/>
+                                    <stackView opaque="NO" contentMode="scaleAspectFill" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-ME-4ip">
+                                        <rect key="frame" x="0.0" y="70" width="314.5" height="206"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="P1Q-g2-coN">
-                                                <rect key="frame" x="0.0" y="0.0" width="144.5" height="206"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="140" height="206"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HoP-Q5-KsU">
                                                         <rect key="frame" x="0.0" y="0.0" width="92" height="35"/>
@@ -395,7 +395,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="jZI-W3-TmV">
-                                                <rect key="frame" x="144.5" y="0.0" width="144.5" height="206"/>
+                                                <rect key="frame" x="170" y="0.0" width="144.5" height="206"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hha-gh-6w6">
                                                         <rect key="frame" x="0.0" y="0.0" width="93" height="35"/>
@@ -572,7 +572,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Mwk-aF-Nj4" firstAttribute="top" secondItem="tkr-Pc-3te" secondAttribute="top" constant="50" id="k7s-Ej-jMN"/>
-                            <constraint firstItem="Mwk-aF-Nj4" firstAttribute="leading" secondItem="tkr-Pc-3te" secondAttribute="leading" constant="10" id="ssc-xd-odh"/>
+                            <constraint firstItem="Mwk-aF-Nj4" firstAttribute="centerX" secondItem="Hww-gJ-eFP" secondAttribute="centerX" id="mLd-sa-pme"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -835,8 +835,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Qsh-hq-UEA"/>
-        <segue reference="pTD-ab-djV"/>
+        <segue reference="x96-Cr-T26"/>
+        <segue reference="F8l-OX-tbB"/>
         <segue reference="noK-sF-jgd"/>
     </inferredMetricsTieBreakers>
     <resources>
